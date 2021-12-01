@@ -7,4 +7,7 @@
     <string name="strIniciarSesion">Connexion</string>
     <string name="strCambiarFoto">" Changer la photo"</string>
     <string name="strRepitePasswd">Répéter le mot de passe</string>
+    <string name="strJefe">Chef</string>
+    <string name="strEncargado">Directeur</string>
+    <string name="strProfesor">Professeur</string>
 </resources>

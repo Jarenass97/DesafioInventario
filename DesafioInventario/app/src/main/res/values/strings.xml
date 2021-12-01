@@ -6,4 +6,7 @@
     <string name="strIniciarSesion">Log in</string>
     <string name="strCambiarFoto">Change photo</string>
     <string name="strRepitePasswd">Repeat password</string>
+    <string name="strJefe">Boss</string>
+    <string name="strEncargado">Manager</string>
+    <string name="strProfesor">Teacher</string>
 </resources>

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:inAnimation="@android:anim/slide_in_left"
-    android:outAnimation="@android:anim/slide_out_right"
     tools:context=".LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,10 +91,11 @@
             android:id="@+id/imgUsuario"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginStart="40dp"
             android:src="@drawable/user_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.103" />
@@ -109,7 +109,6 @@
             android:text="@string/strCambiarFoto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgUsuario"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/imgUsuario"
             app:layout_constraintTop_toBottomOf="@+id/imgUsuario"
             app:layout_constraintVertical_bias="0.0" />
@@ -174,6 +173,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCambiarFoto"
             app:layout_constraintVertical_bias="0.0" />
+
+        <RadioGroup
+            android:id="@+id/rgRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/btnCambiarFoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgUsuario"
+            app:layout_constraintTop_toTopOf="@+id/imgUsuario">
+
+            <RadioButton
+                android:id="@+id/rbRolJefe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/strJefe" />
+
+            <RadioButton
+                android:id="@+id/rbRolEncargado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strEncargado" />
+
+            <RadioButton
+                android:id="@+id/rbRolProfesor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strProfesor" />
+        </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ViewAnimator>
