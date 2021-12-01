@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"  Inventaire de la classe"</string>
+    <string name="strUsuario">" Nom d'utilisateur"</string>
+    <string name="strPasswd">" le mot de passe"</string>
+    <string name="strRegistrarse">" Enregistrement"</string>
+</resources>

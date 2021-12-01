@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventario Aulas</string>
+    <string name="strUsuario">Nombre de usuario</string>
+    <string name="strPasswd">Contraseña</string>
+    <string name="strRegistrarse">Registrarse</string>
+</resources>
