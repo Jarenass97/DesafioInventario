@@ -21,6 +21,8 @@
     </style>
 
     <style name="EntradasLogin" parent="margenes">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18dp</item>
     </style>
 
@@ -29,6 +31,7 @@
     </style>
 
     <style name="botones" parent="margenes">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">18dp</item>
     </style>
 </resources>

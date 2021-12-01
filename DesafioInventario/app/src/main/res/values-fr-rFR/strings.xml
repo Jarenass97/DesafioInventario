@@ -4,4 +4,7 @@
     <string name="strUsuario">" Nom d'utilisateur"</string>
     <string name="strPasswd">" le mot de passe"</string>
     <string name="strRegistrarse">" Enregistrement"</string>
+    <string name="strIniciarSesion">Connexion</string>
+    <string name="strCambiarFoto">" Changer la photo"</string>
+    <string name="strRepitePasswd">Répéter le mot de passe</string>
 </resources>

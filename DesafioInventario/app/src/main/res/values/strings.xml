@@ -3,4 +3,7 @@
     <string name="strUsuario">Username</string>
     <string name="strPasswd">Password</string>
     <string name="strRegistrarse">Check in</string>
+    <string name="strIniciarSesion">Log in</string>
+    <string name="strCambiarFoto">Change photo</string>
+    <string name="strRepitePasswd">Repeat password</string>
 </resources>
