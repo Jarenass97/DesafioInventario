@@ -10,4 +10,6 @@
     <string name="strJefe">Chef</string>
     <string name="strEncargado">Directeur</string>
     <string name="strProfesor">Professeur</string>
+    <string name="strCamposVacios">" Remplissez tous les champs"</string>
+    <string name="strPassNoCoinciden">Les mots de passe ne correspondent pas</string>
 </resources>

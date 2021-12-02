@@ -16,7 +16,6 @@
 
     <style name="margenes" parent="Theme.DesafioInventario">
         <item name="android:layout_marginStart">40dp</item>
-        <item name="android:layout_marginTop">40dp</item>
         <item name="android:layout_marginEnd">40dp</item>
     </style>
 
@@ -33,5 +32,9 @@
     <style name="botones" parent="margenes">
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">18dp</item>
+    </style>
+    <style name="textoError" parent="margenes">
+        <item name="android:textColor">@color/error</item>
+        <item name="android:textSize">12dp</item>
     </style>
 </resources>

@@ -29,6 +29,7 @@
             style="@style/EntradasLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="@string/strUsuario"
             android:inputType="textPersonName"
@@ -43,6 +44,7 @@
             style="@style/EntradasLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="@string/strPasswd"
             android:inputType="textPassword"
@@ -54,6 +56,19 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/txtMensajeLogin"
+            style="@style/textoError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edPasswdLogin"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
             android:id="@+id/txtRegistrar"
             style="@style/textBoton"
             android:layout_width="wrap_content"
@@ -62,9 +77,9 @@
             android:text="@string/strRegistrarse"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edPasswdLogin"
+            app:layout_constraintTop_toBottomOf="@+id/txtMensajeLogin"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
@@ -87,18 +102,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imgUsuario"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginStart="40dp"
-            android:src="@drawable/user_default"
+            android:layout_marginTop="70dp"
+            app:cardCornerRadius="75dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.153"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.103" />
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageView
+                android:id="@+id/imgUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user_default"
+                app:srcCompat="@drawable/user_default" />
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnCambiarFoto"
@@ -108,14 +132,15 @@
             android:layout_marginTop="10dp"
             android:text="@string/strCambiarFoto"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgUsuario"
-            app:layout_constraintStart_toStartOf="@+id/imgUsuario"
-            app:layout_constraintTop_toBottomOf="@+id/imgUsuario"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/edUsuarioReg"
             style="@style/EntradasLogin"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="@string/strUsuario"
             android:inputType="textPersonName"
@@ -128,6 +153,7 @@
         <EditText
             android:id="@+id/edPasswdReg"
             style="@style/EntradasLogin"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="@string/strPasswd"
             android:inputType="textPassword"
@@ -140,6 +166,7 @@
         <EditText
             android:id="@+id/edPasswd2Reg"
             style="@style/EntradasLogin"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="@string/strRepitePasswd"
             android:inputType="textPassword"
@@ -154,17 +181,19 @@
             android:id="@+id/btnRegistrar"
             style="@style/botones"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:onClick="registrar"
             android:text="@string/strRegistrarse"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edPasswd2Reg"
+            app:layout_constraintTop_toBottomOf="@+id/txtMensajeErrorReg"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/edCorreoRegistro"
             style="@style/EntradasLogin"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
@@ -180,8 +209,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/btnCambiarFoto"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgUsuario"
-            app:layout_constraintTop_toTopOf="@+id/imgUsuario">
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/cardView">
 
             <RadioButton
                 android:id="@+id/rbRolJefe"
@@ -202,6 +231,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/strProfesor" />
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/txtMensajeErrorReg"
+            style="@style/textoError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edPasswd2Reg"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ViewAnimator>

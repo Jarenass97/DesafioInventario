@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pulsacion">#41373535</color>
+    <color name="error">#E10D0D</color>
 </resources>

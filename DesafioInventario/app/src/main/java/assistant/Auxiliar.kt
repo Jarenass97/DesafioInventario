@@ -1,0 +1,5 @@
+package assistant
+
+object Auxiliar {
+
+}

@@ -9,4 +9,6 @@
     <string name="strJefe">Boss</string>
     <string name="strEncargado">Manager</string>
     <string name="strProfesor">Teacher</string>
+    <string name="strCamposVacios">Fill in all the fields</string>
+    <string name="strPassNoCoinciden">Passwords do not match</string>
 </resources>

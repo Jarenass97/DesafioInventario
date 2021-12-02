@@ -10,4 +10,6 @@
     <string name="strJefe">Jefe</string>
     <string name="strEncargado">Encargado</string>
     <string name="strProfesor">Profesor</string>
+    <string name="strCamposVacios">Rellene todos los campos</string>
+    <string name="strPassNoCoinciden">Las contraseñas no coinciden</string>
 </resources>
