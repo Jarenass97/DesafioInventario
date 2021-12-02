@@ -101,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
             val user = Usuario(
                 edUsernameReg.text.toString(),
                 edPass1Reg.text.toString(),
+                edEmailReg.text.toString(),
                 rol,
                 photo
             )
