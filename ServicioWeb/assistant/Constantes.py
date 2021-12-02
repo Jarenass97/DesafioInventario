@@ -1,1 +1,5 @@
-
+TABLA_USUARIOS = 'usuarios'
+USERNAME__USUARIOS = 'username'
+PASSWD__USUARIOS = 'password'
+EMAIL__USUARIOS = 'email'
+IMAGE__USUARIOS = 'image'
