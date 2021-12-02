@@ -35,7 +35,7 @@ class Conexion:
     def cerrarConexion(self):
         self._conexion.close()
 
-    def insertarUsuario(self, username, passwd, email, image):
+    def insertarUsuario(self, username, passwd, email, image, roles):
         try:
             self.conectar()
             cursor = self._conexion.cursor()
@@ -43,8 +43,42 @@ class Conexion:
                        f"{Constantes.PASSWD__USUARIOS},{Constantes.EMAIL__USUARIOS},{Constantes.IMAGE__USUARIOS}) " \
                        f"values (%s,%s,%s,%s) "
             cursor.execute(consulta, (username, passwd, email, image))
+            for rol in roles:
+                consulta = f"INSERT INTO {Constantes.TABLA__USER_ROLES}({Constantes.ID_USER__USER_ROLES}," \
+                           f"{Constantes.ID_ROL__USER_ROLES}) " \
+                           f"values (%s,%s) "
+                cursor.execute(consulta, (username, rol))
             self._conexion.commit()
             self.cerrarConexion()
             return 0
         except pymysql.err.IntegrityError as e:
             return -1
+
+    def getUsuario(self, username):
+        try:
+            self.conectar()
+            cursor = self._conexion.cursor()
+            cursor.execute(
+                f"SELECT * FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = %s",
+                username)
+            r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()]
+            if r:
+                usuario = r[0]
+                del cursor
+                cursor = self._conexion.cursor()
+                consulta = f"SELECT {Constantes.ID_ROL__USER_ROLES} FROM {Constantes.TABLA__USER_ROLES} WHERE {Constantes.ID_USER__USER_ROLES} in (SELECT {Constantes.USERNAME__USUARIOS} FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = %s)"
+                cursor.execute(consulta, username)
+                r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
+                     cursor.fetchall()]
+                if r:
+                    roles = []
+                    for rol in r:
+                        roles.append(rol[Constantes.ID_ROL__USER_ROLES])
+                    usuario[Constantes.ARRAY_ROLES] = roles
+                self.cerrarConexion()
+                return usuario
+            else:
+                self.cerrarConexion()
+                return []
+        except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return []
