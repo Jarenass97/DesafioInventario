@@ -12,4 +12,6 @@
     <string name="strProfesor">Profesor</string>
     <string name="strCamposVacios">Rellene todos los campos</string>
     <string name="strPassNoCoinciden">Las contraseñas no coinciden</string>
+    <string name="strOperacionExitosa">Operación finalizada con éxito</string>
+    <string name="strFalloConexion">Fallo de conexión</string>
 </resources>

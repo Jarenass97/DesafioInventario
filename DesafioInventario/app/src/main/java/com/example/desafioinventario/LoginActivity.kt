@@ -6,13 +6,22 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import api.InventarioApi
+import api.ServiceBuilder
 import assistant.Animacion
 import assistant.Rol
 import model.Usuario
+import okhttp3.ResponseBody
+import org.jetbrains.anko.toast
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Callback
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var login_reg: ViewAnimator
@@ -28,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var imgUser: ImageView
     var isLogin = true
     var photo: Bitmap? = null
+    val contexto = this
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,8 +74,32 @@ class LoginActivity : AppCompatActivity() {
 
     fun iniciarSesion(view: View) {
         if (camposLoginVacios()) mostrarError(txtMensajeLogin, getString(R.string.strCamposVacios))
-        //Buscar username en base de datos y comprobar si la contraseña es correcta. en caso afirmativo acceder
-        //al menú principal de la app
+        var usuarioBD: Usuario? = null
+        val request = ServiceBuilder.buildService(InventarioApi::class.java)
+        val call = request.getUsuario(edUsernameLogin.text.toString())
+        call.enqueue(object : Callback<Usuario> {
+            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                val post = response.body()
+                if (post != null) {
+                    usuarioBD =
+                        Usuario(post.username, post.passwd, post.roles, post.email, post.img)
+                }
+            }
+
+            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                Toast.makeText(contexto, getString(R.string.strFalloConexion), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+        if (usuarioBD != null) {
+            if (usuarioBD!!.passwd == edPasswdLogin.text.toString()) {
+                Toast.makeText(contexto, "Login correcto", Toast.LENGTH_SHORT).show()
+            } else {
+                mostrarError(txtMensajeLogin, "Datos incorrectos")
+            }
+        } else {
+            mostrarError(txtMensajeLogin, "Datos incorrectos")
+        }
     }
 
     private fun camposLoginVacios(): Boolean {
@@ -97,14 +131,40 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.strPassNoCoinciden)
         )
         else {
-            val rol = getRol()
+            val roles = ArrayList<Rol>(0)
+            roles.add(getRol())
             val user = Usuario(
                 edUsernameReg.text.toString(),
                 edPass1Reg.text.toString(),
-                rol,
-                photo
+                roles,
+                edEmailReg.text.toString()
             )
-            //registrar user
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.addUser(user)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(
+                            contexto,
+                            getString(R.string.strOperacionExitosa),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else Toast.makeText(contexto, "el usuario ya existe", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(
+                        contexto,
+                        getString(R.string.strFalloConexion),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            })
             reiniciar()
         }
     }

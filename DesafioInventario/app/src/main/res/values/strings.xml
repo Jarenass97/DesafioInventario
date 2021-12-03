@@ -11,4 +11,6 @@
     <string name="strProfesor">Teacher</string>
     <string name="strCamposVacios">Fill in all the fields</string>
     <string name="strPassNoCoinciden">Passwords do not match</string>
+    <string name="strOperacionExitosa">Operation completed successfully</string>
+    <string name="strFalloConexion">Connection failure</string>
 </resources>
