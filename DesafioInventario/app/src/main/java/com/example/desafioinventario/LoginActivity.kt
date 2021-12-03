@@ -3,6 +3,7 @@ package com.example.desafioinventario
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,10 +15,10 @@ import androidx.core.view.isVisible
 import api.InventarioApi
 import api.ServiceBuilder
 import assistant.Animacion
+import assistant.Auxiliar
 import assistant.Rol
 import model.Usuario
 import okhttp3.ResponseBody
-import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -73,32 +74,51 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun iniciarSesion(view: View) {
-        if (camposLoginVacios()) mostrarError(txtMensajeLogin, getString(R.string.strCamposVacios))
-        var usuarioBD: Usuario? = null
-        val request = ServiceBuilder.buildService(InventarioApi::class.java)
-        val call = request.getUsuario(edUsernameLogin.text.toString())
-        call.enqueue(object : Callback<Usuario> {
-            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                val post = response.body()
-                if (post != null) {
-                    usuarioBD =
-                        Usuario(post.username, post.passwd, post.roles, post.email, post.img)
+        if (camposLoginVacios())
+            mostrarTextError(
+                txtMensajeLogin,
+                getString(R.string.strCamposVacios)
+            )
+        else {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.getUsuario(edUsernameLogin.text.toString())
+            call.enqueue(object : Callback<Usuario> {
+                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                    if (response.code() == 200) {
+                        val post = response.body()
+                        var usuarioBD: Usuario? = null
+                        if (post != null) {
+                            usuarioBD =
+                                Usuario(
+                                    post.username,
+                                    post.passwd,
+                                    post.roles,
+                                    post.email,
+                                    post.img
+                                )
+                        }
+                        if (usuarioBD != null) {
+                            if (usuarioBD!!.passwd == edPasswdLogin.text.toString()) {
+                                Toast.makeText(contexto, "Login correcto", Toast.LENGTH_SHORT)
+                                    .show()
+                            } else {
+                                mostrarTextError(txtMensajeLogin, "Datos incorrectos")
+                            }
+                        } else {
+                            mostrarTextError(txtMensajeLogin, "Datos incorrectos")
+                        }
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                Toast.makeText(contexto, getString(R.string.strFalloConexion), Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
-        if (usuarioBD != null) {
-            if (usuarioBD!!.passwd == edPasswdLogin.text.toString()) {
-                Toast.makeText(contexto, "Login correcto", Toast.LENGTH_SHORT).show()
-            } else {
-                mostrarError(txtMensajeLogin, "Datos incorrectos")
-            }
-        } else {
-            mostrarError(txtMensajeLogin, "Datos incorrectos")
+                override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    Toast.makeText(
+                        contexto,
+                        getString(R.string.strFalloConexion),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            })
         }
     }
 
@@ -106,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
         return edUsernameLogin.text.isEmpty() || edPasswdLogin.text.isEmpty()
     }
 
-    private fun mostrarError(txt: TextView, error: String) {
+    private fun mostrarTextError(txt: TextView, error: String) {
         txt.text = error
         txt.isVisible = true
         txt.startAnimation(animaciones.aparicion_difuminada)
@@ -125,8 +145,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun registrar(view: View) {
-        if (camposRegVacios()) mostrarError(txtMensajeReg, getString(R.string.strCamposVacios))
-        else if (!passCoinciden()) mostrarError(
+        if (camposRegVacios()) mostrarTextError(txtMensajeReg, getString(R.string.strCamposVacios))
+        else if (!passCoinciden()) mostrarTextError(
             txtMensajeReg,
             getString(R.string.strPassNoCoinciden)
         )
@@ -139,6 +159,7 @@ class LoginActivity : AppCompatActivity() {
                 roles,
                 edEmailReg.text.toString()
             )
+            Log.e("jorge", user.toString())
             val request = ServiceBuilder.buildService(InventarioApi::class.java)
             val call = request.addUser(user)
             call.enqueue(object : Callback<ResponseBody> {

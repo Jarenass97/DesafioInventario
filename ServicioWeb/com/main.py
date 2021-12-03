@@ -33,6 +33,7 @@ def getUsers():
 @app.route('/addUser', methods=["POST"])
 def addUsuario():
     data = request.json
+    print(data[Constantes.IMAGE__USUARIOS])
     if (conexion.insertarUsuario(data[Constantes.USERNAME__USUARIOS], data[Constantes.PASSWD__USUARIOS],
                                  data[Constantes.EMAIL__USUARIOS], data[Constantes.IMAGE__USUARIOS], data[Constantes.ARRAY_ROLES]) == 0):
         respuesta = {'message': 'OK.'}

@@ -1,3 +1,5 @@
+import array
+
 import pymysql
 from assistant import Constantes
 
@@ -39,15 +41,31 @@ class Conexion:
         try:
             self.conectar()
             cursor = self._conexion.cursor()
-            consulta = f"INSERT INTO {Constantes.TABLA_USUARIOS}({Constantes.USERNAME__USUARIOS}," \
-                       f"{Constantes.PASSWD__USUARIOS},{Constantes.EMAIL__USUARIOS},{Constantes.IMAGE__USUARIOS}) " \
-                       f"values (%s,%s,%s,%s) "
-            cursor.execute(consulta, (username, passwd, email, image))
+            if not image:
+                consulta = f"INSERT INTO {Constantes.TABLA_USUARIOS}({Constantes.USERNAME__USUARIOS}," \
+                           f"{Constantes.PASSWD__USUARIOS},{Constantes.EMAIL__USUARIOS}) " \
+                           f"values ('{username}','{passwd}','{email}')"
+            else:
+                consulta = f"INSERT INTO {Constantes.TABLA_USUARIOS}({Constantes.USERNAME__USUARIOS}," \
+                           f"{Constantes.PASSWD__USUARIOS},{Constantes.EMAIL__USUARIOS},{Constantes.IMAGE__USUARIOS}) " \
+                           f"values ('{username}','{passwd}','{email}',{image})"
+            print(consulta)
+            cursor.execute(consulta)
+            print('ojooo')
             for rol in roles:
+                id_rol = 0
+                if rol == Constantes.JEFE_DEPARTAMENTO:
+                    id_rol = 1
+                elif rol == Constantes.ENCARGADO:
+                    id_rol = 2
+                elif rol == Constantes.PROFESOR:
+                    id_rol = 3
                 consulta = f"INSERT INTO {Constantes.TABLA__USER_ROLES}({Constantes.ID_USER__USER_ROLES}," \
                            f"{Constantes.ID_ROL__USER_ROLES}) " \
-                           f"values (%s,%s) "
-                cursor.execute(consulta, (username, rol))
+                           f"values ('{username}',{id_rol}) "
+                print(consulta)
+                cursor.execute(consulta)
+                print('hecho')
             self._conexion.commit()
             self.cerrarConexion()
             return 0
