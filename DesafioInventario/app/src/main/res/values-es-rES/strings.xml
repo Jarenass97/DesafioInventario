@@ -14,4 +14,8 @@
     <string name="strPassNoCoinciden">Las contraseñas no coinciden</string>
     <string name="strOperacionExitosa">Operación finalizada con éxito</string>
     <string name="strFalloConexion">Fallo de conexión</string>
+    <string name="strElegirFoto">Elegir foto</string>
+    <string name="strMensajeElegirFoto">¿Cómo quiere añadir la foto?</string>
+    <string name="strCamara">Cámara</string>
+    <string name="strGaleria">Galeria</string>
 </resources>

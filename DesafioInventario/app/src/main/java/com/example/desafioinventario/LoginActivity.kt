@@ -1,16 +1,23 @@
 package com.example.desafioinventario
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import api.InventarioApi
 import api.ServiceBuilder
@@ -22,6 +29,8 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 
 class LoginActivity : AppCompatActivity() {
@@ -73,6 +82,48 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+    fun cambiarFoto(view: View) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.strElegirFoto))
+            .setMessage(getString(R.string.strMensajeElegirFoto))
+            .setPositiveButton(getString(R.string.strCamara)) { view, _ ->
+                hacerFoto()
+                view.dismiss()
+            }
+            .setNegativeButton(getString(R.string.strGaleria)) { view, _ ->
+                elegirDeGaleria()
+                view.dismiss()
+            }
+            .setCancelable(true)
+            .create()
+            .show()
+    }
+
+    private fun elegirDeGaleria() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+            Intent.createChooser(intent, "Seleccione una imagen"),
+            Auxiliar.CODE_GALLERY
+        )
+    }
+
+    private fun hacerFoto() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_DENIED
+        )
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                Auxiliar.CODE_CAMERA
+            )
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, Auxiliar.CODE_CAMERA)
+    }
+
     fun iniciarSesion(view: View) {
         if (camposLoginVacios())
             mostrarTextError(
@@ -86,9 +137,9 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                     if (response.code() == 200) {
                         val post = response.body()
-                        var usuarioBD: Usuario? = null
+                        var usuario: Usuario? = null
                         if (post != null) {
-                            usuarioBD =
+                            usuario =
                                 Usuario(
                                     post.username,
                                     post.passwd,
@@ -97,8 +148,8 @@ class LoginActivity : AppCompatActivity() {
                                     post.img
                                 )
                         }
-                        if (usuarioBD != null) {
-                            if (usuarioBD!!.passwd == edPasswdLogin.text.toString()) {
+                        if (usuario != null) {
+                            if (usuario.passwd == edPasswdLogin.text.toString()) {
                                 Toast.makeText(contexto, "Login correcto", Toast.LENGTH_SHORT)
                                     .show()
                             } else {
@@ -159,6 +210,9 @@ class LoginActivity : AppCompatActivity() {
                 roles,
                 edEmailReg.text.toString()
             )
+            if (photo != null) {
+                user.img = Auxiliar.getBytes(photo!!)
+            }
             Log.e("jorge", user.toString())
             val request = ServiceBuilder.buildService(InventarioApi::class.java)
             val call = request.addUser(user)
@@ -214,5 +268,38 @@ class LoginActivity : AppCompatActivity() {
 
     private fun camposRegVacios(): Boolean {
         return edEmailReg.text.isEmpty() || edUsernameReg.text.isEmpty() || edPass1Reg.text.isEmpty() || edPass2Reg.text.isEmpty()
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Auxiliar.CODE_CAMERA -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    photo = data?.extras?.get("data") as Bitmap
+                    imgUser.setImageBitmap(photo)
+                }
+            }
+            Auxiliar.CODE_GALLERY -> {
+                if (resultCode === Activity.RESULT_OK) {
+                    val selectedImage = data?.data
+                    val selectedPath: String? = selectedImage?.path
+                    if (selectedPath != null) {
+                        var imageStream: InputStream? = null
+                        try {
+                            imageStream = selectedImage.let {
+                                contentResolver.openInputStream(
+                                    it
+                                )
+                            }
+                        } catch (e: FileNotFoundException) {
+                            e.printStackTrace()
+                        }
+                        val bmp = BitmapFactory.decodeStream(imageStream)
+                        photo = Bitmap.createScaledBitmap(bmp, 200, 300, true)
+                        imgUser.setImageBitmap(photo)
+                    }
+                }
+            }
+        }
     }
 }

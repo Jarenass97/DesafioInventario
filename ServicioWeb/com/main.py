@@ -33,7 +33,6 @@ def getUsers():
 @app.route('/addUser', methods=["POST"])
 def addUsuario():
     data = request.json
-    print(data[Constantes.IMAGE__USUARIOS])
     if (conexion.insertarUsuario(data[Constantes.USERNAME__USUARIOS], data[Constantes.PASSWD__USUARIOS],
                                  data[Constantes.EMAIL__USUARIOS], data[Constantes.IMAGE__USUARIOS], data[Constantes.ARRAY_ROLES]) == 0):
         respuesta = {'message': 'OK.'}
@@ -48,9 +47,11 @@ def addUsuario():
 
 @app.route("/usuario/<username>", methods=['GET'])
 def getUsuario(username):
-    lista = conexion.getUsuario(username)
-    if len(lista) != 0:
-        resp = jsonify(lista)
+    usuarios = conexion.getUsuario(username)
+    #print(usuarios)
+    if len(usuarios) != 0:
+        resp = jsonify(usuarios)
+        #print(resp.json)
         resp.status_code = 200
     else:
         respuesta = {'message': 'No existe el usuario'}

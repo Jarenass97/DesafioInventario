@@ -14,4 +14,8 @@
     <string name="strPassNoCoinciden">Les mots de passe ne correspondent pas</string>
     <string name="strOperacionExitosa">" Opération terminée avec succès"</string>
     <string name="strFalloConexion">"Échec de connexion "</string>
+    <string name="strElegirFoto">Choisissez la photo</string>
+    <string name="strMensajeElegirFoto">Comment voulez-vous ajouter la photo ?</string>
+    <string name="strCamara">Caméra</string>
+    <string name="strGaleria">Galerie</string>
 </resources>
