@@ -22,4 +22,6 @@
     <string name="strCredencialesIncorrectas">Credenciales incorrectas</string>
     <string name="strTituloCerrarSesion">Cerrar sesión</string>
     <string name="strMensajeCerrarSesion">¿Desea cerrar sesión?</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="menu_home">Inicio</string>
 </resources>

@@ -21,4 +21,7 @@
     <string name="strCredencialesIncorrectas">Wrong credentials</string>
     <string name="strTituloCerrarSesion">Log out</string>
     <string name="strMensajeCerrarSesion">Do you want to log out?</string>
+    <string name="title_activity_interfaz_usuario" translatable="false">InterfazUsuarioActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
 </resources>

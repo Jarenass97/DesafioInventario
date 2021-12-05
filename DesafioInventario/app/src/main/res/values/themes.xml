@@ -35,8 +35,18 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">18dp</item>
     </style>
+
     <style name="textoError" parent="margenes">
         <item name="android:textColor">@color/error</item>
         <item name="android:textSize">12dp</item>
     </style>
+
+    <style name="Theme.DesafioInventario.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.DesafioInventario.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DesafioInventario.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

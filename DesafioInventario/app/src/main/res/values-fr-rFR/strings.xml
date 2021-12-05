@@ -22,4 +22,6 @@
     <string name="strCredencialesIncorrectas">Identifiants erronés</string>
     <string name="strTituloCerrarSesion">Se déconnecter</string>
     <string name="strMensajeCerrarSesion">Voulez-vous vous déconnecter ?</string>
+    <string name="action_settings">Les paramètres</string>
+    <string name="menu_home">point de départ</string>
 </resources>
