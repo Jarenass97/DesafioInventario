@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventario Aulas</string>
+    <string name="strUsuario">Nombre de usuario</string>
+    <string name="strPasswd">Contraseña</string>
+    <string name="strRegistrarse">Registrarse</string>
+    <string name="strIniciarSesion">Iniciar Sesión</string>
+    <string name="strCambiarFoto">Cambiar foto</string>
+    <string name="strRepitePasswd">Repite contraseña</string>
+    <string name="strJefe">Jefe</string>
+    <string name="strEncargado">Encargado</string>
+    <string name="strProfesor">Profesor</string>
+    <string name="strCamposVacios">Rellene todos los campos</string>
+    <string name="strPassNoCoinciden">Las contraseñas no coinciden</string>
+    <string name="strOperacionExitosa">Operación finalizada con éxito</string>
+    <string name="strFalloConexion">Fallo de conexión</string>
+    <string name="strElegirFoto">Elegir foto</string>
+    <string name="strMensajeElegirFoto">¿Cómo quiere añadir la foto?</string>
+    <string name="strCamara">Cámara</string>
+    <string name="strGaleria">Galeria</string>
+    <string name="strLoginCorrecto">Inicio de sesión exitoso</string>
+    <string name="strCredencialesIncorrectas">Credenciales incorrectas</string>
+</resources>

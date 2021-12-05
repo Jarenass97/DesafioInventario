@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"  Inventaire de la classe"</string>
+    <string name="strUsuario">" Nom d'utilisateur"</string>
+    <string name="strPasswd">" le mot de passe"</string>
+    <string name="strRegistrarse">" Enregistrement"</string>
+    <string name="strIniciarSesion">Connexion</string>
+    <string name="strCambiarFoto">" Changer la photo"</string>
+    <string name="strRepitePasswd">Répéter le mot de passe</string>
+    <string name="strJefe">Chef</string>
+    <string name="strEncargado">Directeur</string>
+    <string name="strProfesor">Professeur</string>
+    <string name="strCamposVacios">" Remplissez tous les champs"</string>
+    <string name="strPassNoCoinciden">Les mots de passe ne correspondent pas</string>
+    <string name="strOperacionExitosa">" Opération terminée avec succès"</string>
+    <string name="strFalloConexion">"Échec de connexion "</string>
+    <string name="strElegirFoto">Choisissez la photo</string>
+    <string name="strMensajeElegirFoto">Comment voulez-vous ajouter la photo ?</string>
+    <string name="strCamara">Caméra</string>
+    <string name="strGaleria">Galerie</string>
+    <string name="strLoginCorrecto">" Connexion réussie"</string>
+    <string name="strCredencialesIncorrectas">" Identifiants erronés"</string>
+</resources>

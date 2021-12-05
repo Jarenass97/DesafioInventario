@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">DesafioInventario</string>
+    <string name="app_name">Classroom Inventory</string>
+    <string name="strUsuario">Username</string>
+    <string name="strPasswd">Password</string>
+    <string name="strRegistrarse">Check in</string>
+    <string name="strIniciarSesion">Log in</string>
+    <string name="strCambiarFoto">Change photo</string>
+    <string name="strRepitePasswd">Repeat password</string>
+    <string name="strJefe">Boss</string>
+    <string name="strEncargado">Manager</string>
+    <string name="strProfesor">Teacher</string>
+    <string name="strCamposVacios">Fill in all the fields</string>
+    <string name="strPassNoCoinciden">Passwords do not match</string>
+    <string name="strOperacionExitosa">Operation completed successfully</string>
+    <string name="strFalloConexion">Connection failure</string>
+    <string name="strElegirFoto">Choose photo</string>
+    <string name="strMensajeElegirFoto">How do you want to add the photo?</string>
+    <string name="strCamara">Camera</string>
+    <string name="strGaleria">Gallery</string>
+    <string name="strLoginCorrecto">Login successfull</string>
+    <string name="strCredencialesIncorrectas">Wrong credentials</string>
 </resources>
