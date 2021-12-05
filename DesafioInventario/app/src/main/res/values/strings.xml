@@ -17,4 +17,6 @@
     <string name="strMensajeElegirFoto">How do you want to add the photo?</string>
     <string name="strCamara">Camera</string>
     <string name="strGaleria">Gallery</string>
+    <string name="strLoginCorrecto">Login successfull</string>
+    <string name="strCredencialesIncorrectas">Wrong credentials</string>
 </resources>

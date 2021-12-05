@@ -26,6 +26,7 @@ import assistant.Auxiliar
 import assistant.Rol
 import model.Usuario
 import okhttp3.ResponseBody
+import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -136,28 +137,34 @@ class LoginActivity : AppCompatActivity() {
             call.enqueue(object : Callback<Usuario> {
                 override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                     if (response.code() == 200) {
-                        val post = response.body()
-                        var usuario: Usuario? = null
-                        if (post != null) {
-                            usuario =
-                                Usuario(
-                                    post.username,
-                                    post.passwd,
-                                    post.roles,
-                                    post.email,
-                                    post.img
-                                )
-                        }
-                        if (usuario != null) {
-                            if (usuario.passwd == edPasswdLogin.text.toString()) {
-                                Toast.makeText(contexto, "Login correcto", Toast.LENGTH_SHORT)
-                                    .show()
-                            } else {
-                                mostrarTextError(txtMensajeLogin, "Datos incorrectos")
-                            }
+                        val post = response.body()!!
+                        val usuario =
+                            Usuario(
+                                post.username,
+                                post.passwd,
+                                post.roles,
+                                post.email,
+                                post.img
+                            )
+                        if (usuario.passwd == edPasswdLogin.text.toString()) {
+                            Toast.makeText(
+                                contexto,
+                                getString(R.string.strLoginCorrecto),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
                         } else {
-                            mostrarTextError(txtMensajeLogin, "Datos incorrectos")
+                            mostrarTextError(
+                                txtMensajeLogin,
+                                getString(R.string.strCredencialesIncorrectas)
+                            )
                         }
+                    }
+                    if (response.code() == 400) {
+                        mostrarTextError(
+                            txtMensajeLogin,
+                            getString(R.string.strCredencialesIncorrectas)
+                        )
                     }
                 }
 

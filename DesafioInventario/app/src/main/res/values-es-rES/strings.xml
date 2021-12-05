@@ -18,4 +18,6 @@
     <string name="strMensajeElegirFoto">¿Cómo quiere añadir la foto?</string>
     <string name="strCamara">Cámara</string>
     <string name="strGaleria">Galeria</string>
+    <string name="strLoginCorrecto">Inicio de sesión exitoso</string>
+    <string name="strCredencialesIncorrectas">Credenciales incorrectas</string>
 </resources>
