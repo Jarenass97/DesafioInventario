@@ -18,6 +18,8 @@
     <string name="strMensajeElegirFoto">Comment voulez-vous ajouter la photo ?</string>
     <string name="strCamara">Caméra</string>
     <string name="strGaleria">Galerie</string>
-    <string name="strLoginCorrecto">" Connexion réussie"</string>
-    <string name="strCredencialesIncorrectas">" Identifiants erronés"</string>
+    <string name="strLoginCorrecto">Connexion réussie</string>
+    <string name="strCredencialesIncorrectas">Identifiants erronés</string>
+    <string name="strTituloCerrarSesion">Se déconnecter</string>
+    <string name="strMensajeCerrarSesion">Voulez-vous vous déconnecter ?</string>
 </resources>

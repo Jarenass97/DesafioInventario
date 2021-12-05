@@ -26,6 +26,7 @@ import assistant.Auxiliar
 import assistant.Rol
 import model.Usuario
 import okhttp3.ResponseBody
+import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
@@ -147,6 +148,7 @@ class LoginActivity : AppCompatActivity() {
                                 post.img
                             )
                         if (usuario.passwd == edPasswdLogin.text.toString()) {
+                            contexto.abrirInterfaz(usuario)
                             Toast.makeText(
                                 contexto,
                                 getString(R.string.strLoginCorrecto),
@@ -178,6 +180,13 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun abrirInterfaz(usuario: Usuario) {
+        val intent = Intent(this, InterfazUsuarioActivity::class.java)
+        intent.putExtra("user", usuario)
+        startActivity(intent)
+        finish()
     }
 
     private fun camposLoginVacios(): Boolean {

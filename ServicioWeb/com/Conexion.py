@@ -94,7 +94,7 @@ class Conexion:
                 if r:
                     roles = []
                     for rol in r:
-                        roles.append(rol[Constantes.ID_ROL__USER_ROLES])
+                        roles.append(self.nombreRol(rol[Constantes.ID_ROL__USER_ROLES]))
                     usuario[Constantes.ARRAY_ROLES] = roles
                 self.cerrarConexion()
                 return usuario
@@ -103,3 +103,13 @@ class Conexion:
                 return []
         except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return []
+
+    def nombreRol(self, id_rol):
+        rol = ""
+        if id_rol == 1:
+            rol = Constantes.JEFE_DEPARTAMENTO
+        elif id_rol == 2:
+            rol=Constantes.ENCARGADO
+        elif id_rol == 3:
+            rol=Constantes.PROFESOR
+        return rol

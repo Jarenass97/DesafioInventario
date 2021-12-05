@@ -19,4 +19,6 @@
     <string name="strGaleria">Gallery</string>
     <string name="strLoginCorrecto">Login successfull</string>
     <string name="strCredencialesIncorrectas">Wrong credentials</string>
+    <string name="strTituloCerrarSesion">Log out</string>
+    <string name="strMensajeCerrarSesion">Do you want to log out?</string>
 </resources>
