@@ -24,4 +24,6 @@
     <string name="strMensajeCerrarSesion">Voulez-vous vous déconnecter ?</string>
     <string name="action_settings">Les paramètres</string>
     <string name="menu_home">point de départ</string>
+    <string name="strAula">" salle de cours"</string>
+    <string name="strCurso">Cours</string>
 </resources>

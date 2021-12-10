@@ -127,6 +127,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun iniciarSesion(view: View) {
+        val roles = ArrayList<Rol>(0)
+        roles.add(Rol.PROFESOR)
+        roles.add(Rol.ENCARGADO)
+        roles.add(Rol.JEFE_DEPARTAMENTO)
+        abrirInterfaz(
+            Usuario(
+                "Jarenass97",
+                "Jarenass97",
+                roles,
+                "jarenass@gmail.com",
+                Auxiliar.getBytes(BitmapFactory.decodeResource(resources, R.drawable.user_default))
+            )
+        )
         if (camposLoginVacios())
             mostrarTextError(
                 txtMensajeLogin,

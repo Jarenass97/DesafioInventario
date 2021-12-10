@@ -24,4 +24,6 @@
     <string name="strMensajeCerrarSesion">¿Desea cerrar sesión?</string>
     <string name="action_settings">Ajustes</string>
     <string name="menu_home">Inicio</string>
+    <string name="strAula">Aula</string>
+    <string name="strCurso">Curso</string>
 </resources>

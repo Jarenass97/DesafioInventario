@@ -1,7 +1,15 @@
 package com.example.desafioinventario
 
+import adapters.AulasAdapter
+import android.content.Intent
+import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -11,15 +19,31 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import assistant.Auxiliar
+import assistant.Curso
 import com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding
+import com.example.desafioinventario.databinding.NavHeaderInterfazUsuarioBinding
+import com.example.desafioinventario.ui.home.HomeFragment
+import model.Aula
+import model.Usuario
+import org.jetbrains.anko.find
 
 class InterfazUsuarioActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityInterfazUsuarioBinding
+    lateinit var usuario: Usuario
+    lateinit var rvAulas: RecyclerView
+    lateinit var aulasAdapter: AulasAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val bun: Bundle = intent.extras!!
+        usuario = bun.getSerializable("user") as Usuario
+        Log.e("jorge", usuario.toString())
 
         binding = ActivityInterfazUsuarioBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,7 +56,7 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_interfaz_usuario)
+        val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -42,6 +66,33 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        cargarUsuario()
+    }
+
+    private fun cargarUsuario() {
+        val navigationView : NavigationView  = findViewById(R.id.nav_view)
+        val header : View = navigationView.getHeaderView(0)
+        val img = header.findViewById<ImageView>(R.id.imgUsuarioNavigation)
+        val username = header.findViewById<TextView>(R.id.txtUsernameNavigation)
+        val email = header.findViewById<TextView>(R.id.txtEmailNavigation)
+        if (usuario.img != null) img.setImageBitmap(
+            Auxiliar.getImage(
+                usuario.img!!
+            )
+        )
+        username.text = usuario.username
+        email.text = usuario.email
+    }
+
+    private fun replaceFragment(fragment: HomeFragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
+        fragmentTransaction.commit()
+    }
+
+    private fun newAulasAdapter(adaptador: AulasAdapter) {
+        aulasAdapter = adaptador
+        rvAulas.adapter = aulasAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,7 +102,26 @@ class InterfazUsuarioActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_interfaz_usuario)
+        val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.strTituloCerrarSesion))
+            .setMessage(getString(R.string.strMensajeCerrarSesion))
+            .setPositiveButton("OK") { view, _ ->
+                super.onBackPressed()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+                view.dismiss()
+            }
+            .setNegativeButton("NO") { view, _ ->
+                view.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+            .show()
     }
 }
