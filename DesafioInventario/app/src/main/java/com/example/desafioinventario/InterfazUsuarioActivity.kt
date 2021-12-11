@@ -23,7 +23,9 @@ import assistant.Auxiliar
 import assistant.Curso
 import com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding
 import com.example.desafioinventario.ui.home.HomeFragment
+import model.Aula
 import model.Usuario
+import okhttp3.ResponseBody
 import retrofit2.*
 
 class InterfazUsuarioActivity : AppCompatActivity() {
@@ -74,17 +76,57 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         cargarCursos(curso)
         cargarEncargados(encargado)
         AlertDialog.Builder(this)
-            .setTitle("Add Aula")
+            .setTitle(getString(R.string.strTituloAddAula))
             .setView(aulaView)
             .setPositiveButton("OK") { view, _ ->
+                val aula = Aula(
+                    nombre.text.toString(),
+                    descripcion.text.toString(),
+                    Curso.valueOf(curso.selectedItem.toString()),
+                    encargado.selectedItem.toString(),
+                    alumnos.text.toString().toInt()
+                )
+                crearAula(aula)
                 view.dismiss()
             }
-            .setNegativeButton("cancel") { view, _ ->
+            .setNegativeButton(getString(R.string.strCancelar)) { view, _ ->
                 view.dismiss()
             }
             .setCancelable(false)
             .create()
             .show()
+    }
+
+    private fun crearAula(aula: Aula) {
+        val request = ServiceBuilder.buildService(InventarioApi::class.java)
+        val call = request.addAula(aula)
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>
+            ) {
+                if (response.code() == 200) {
+                    Toast.makeText(
+                        this@InterfazUsuarioActivity,
+                        getString(R.string.strOperacionExitosa),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else Toast.makeText(
+                    this@InterfazUsuarioActivity,
+                    "el aula ya existe",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(
+                    this@InterfazUsuarioActivity,
+                    getString(R.string.strFalloConexion),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 
     private fun cargarEncargados(encargado: Spinner) {
@@ -102,13 +144,17 @@ class InterfazUsuarioActivity : AppCompatActivity() {
                     }
                     encargado.adapter = ArrayAdapter(
                         this@InterfazUsuarioActivity,
-                        R.layout.cursos_list,
-                        R.id.txtCurso,
+                        R.layout.encargados_list,
+                        R.id.txtEncargadoAulaItem,
                         usuarios
                     )
                 } else {
                     Log.e("Fernando", "Algo ha fallado en el login.")
-                    Toast.makeText(this@InterfazUsuarioActivity, response.message().toString(), Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        this@InterfazUsuarioActivity,
+                        response.message().toString(),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
             }

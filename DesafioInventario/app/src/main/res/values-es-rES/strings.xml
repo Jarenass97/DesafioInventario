@@ -28,4 +28,7 @@
     <string name="strCurso">Curso</string>
     <string name="strDescripcion">Descripción</string>
     <string name="strAlumnos">Alumnos</string>
+    <string name="strTituloAddAula">Nueva aula</string>
+    <string name="strCancelar">Cancelar</string>
+    <string name="strNombre">Nombre</string>
 </resources>
