@@ -26,4 +26,6 @@
     <string name="menu_home">Inicio</string>
     <string name="strAula">Aula</string>
     <string name="strCurso">Curso</string>
+    <string name="strDescripcion">Descripción</string>
+    <string name="strAlumnos">Alumnos</string>
 </resources>

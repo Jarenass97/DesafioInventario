@@ -26,4 +26,6 @@
     <string name="menu_home">point de départ</string>
     <string name="strAula">" salle de cours"</string>
     <string name="strCurso">Cours</string>
+    <string name="strDescripcion">" la description"</string>
+    <string name="strAlumnos">Étudiants</string>
 </resources>

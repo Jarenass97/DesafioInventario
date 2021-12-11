@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from Conexion import Conexion
 from assistant import Constantes
+from assistant.Constantes import *
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,18 +16,17 @@ def hello():
            '\n"/usuarios" muestra usuarios' \
            '\n"/usuario/<username>" muestra usuario por nombre de usuario'
 
+
 @app.route('/usuarios', methods=['GET'])
 def getUsers():
     lista = conexion.getUsuarios()
-    print(lista)
-    if (len(lista) != 0):
+    if len(lista) != 0:
         resp = jsonify(lista)
         resp.status_code = 200
     else:
         respuesta = {'message': 'No existen usuarios.'}
         resp = jsonify(respuesta)
         resp.status_code = 400
-    print(resp)
     return resp
 
 
@@ -34,7 +34,8 @@ def getUsers():
 def addUsuario():
     data = request.json
     if (conexion.insertarUsuario(data[Constantes.USERNAME__USUARIOS], data[Constantes.PASSWD__USUARIOS],
-                                 data[Constantes.EMAIL__USUARIOS], data[Constantes.IMAGE__USUARIOS], data[Constantes.ARRAY_ROLES]) == 0):
+                                 data[Constantes.EMAIL__USUARIOS], data[Constantes.IMAGE__USUARIOS],
+                                 data[Constantes.ARRAY_ROLES]) == 0):
         respuesta = {'message': 'OK.'}
         resp = jsonify(respuesta)
         resp.status_code = 200
@@ -45,13 +46,26 @@ def addUsuario():
     return resp
 
 
+@app.route('/addAula', methods=["POST"])
+def addAula():
+    data = request.json
+    if (conexion.insertarAula(data[NOMBRE__AULAS], data[DESCRIPCION__AULAS], data[CURSO_IMPARTIDO__AULAS],
+                              data[ENCARGADO__AULAS], data[NUM_ALUMNOS__AULAS]) == 0):
+        respuesta = {'message': 'OK.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'El aula ya existe.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
 @app.route("/usuario/<username>", methods=['GET'])
 def getUsuario(username):
     usuarios = conexion.getUsuario(username)
-    #print(usuarios)
     if len(usuarios) != 0:
         resp = jsonify(usuarios)
-        #print(resp.json)
         resp.status_code = 200
     else:
         respuesta = {'message': 'No existe el usuario'}

@@ -37,8 +37,8 @@ class HomeFragment() : Fragment() {
         rvAulas.setHasFixedSize(true)
         rvAulas.layoutManager = LinearLayoutManager(this.context)
         val aulas = ArrayList<Aula>(0)
-        aulas.add(Aula("209", "", Curso.DAM2))
-        aulas.add(Aula("212", "", Curso.DAM1))
+        aulas.add(Aula("209", "", Curso.DAM2,null,20))
+        aulas.add(Aula("212", "", Curso.DAM1,null,23))
         newAulasAdapter(AulasAdapter(this.context as AppCompatActivity, aulas))
     }
     private fun newAulasAdapter(adaptador: AulasAdapter) {
