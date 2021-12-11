@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34d7d31a-d8a0-4f78-84cb-1c1c77cc7c6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/encargados_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_class.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_update.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/AulasAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/AulasAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InterfazUsuarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InterfazUsuarioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/app_bar_interfaz_usuario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/app_bar_interfaz_usuario.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/aulas_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/aulas_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/cursos_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/cursos_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/encargados_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/encargados_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/Conexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/Conexion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

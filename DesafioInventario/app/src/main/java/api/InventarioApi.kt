@@ -20,4 +20,7 @@ interface InventarioApi {
     @Headers("Content-Type:application/json")
     @POST("/addAula")
     fun addAula(@Body info: Aula): Call<ResponseBody>
+
+    @GET("/aulas")
+    fun getAulas(): Call<MutableList<Aula>>
 }

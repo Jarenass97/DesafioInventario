@@ -146,3 +146,15 @@ class Conexion:
         elif id_rol == 3:
             rol = Constantes.PROFESOR
         return rol
+
+    def getAulas(self):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                cursor.execute(f"SELECT * FROM {TABLA__AULAS}")
+                r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
+                     cursor.fetchall()]
+                self.cerrarConexion()
+                return r
+        except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return []

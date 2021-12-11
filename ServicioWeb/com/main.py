@@ -61,6 +61,19 @@ def addAula():
     return resp
 
 
+@app.route('/aulas', methods=['GET'])
+def getAulas():
+    lista = conexion.getAulas()
+    if len(lista) != 0:
+        resp = jsonify(lista)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'No existen aulas.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
 @app.route("/usuario/<username>", methods=['GET'])
 def getUsuario(username):
     usuarios = conexion.getUsuario(username)

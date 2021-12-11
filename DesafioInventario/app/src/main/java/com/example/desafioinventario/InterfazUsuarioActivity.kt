@@ -41,16 +41,12 @@ class InterfazUsuarioActivity : AppCompatActivity() {
 
         val bun: Bundle = intent.extras!!
         usuario = bun.getSerializable("user") as Usuario
-        Log.e("jorge", usuario.toString())
 
         binding = ActivityInterfazUsuarioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarInterfazUsuario.toolbar)
 
-        binding.appBarInterfazUsuario.btnAddAula.setOnClickListener { view ->
-            dialogAula()
-        }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
@@ -64,115 +60,6 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         cargarUsuario()
-    }
-
-    private fun dialogAula() {
-        val aulaView = layoutInflater.inflate(R.layout.aulas_creater, null)
-        val nombre = aulaView.findViewById<EditText>(R.id.edNombreAula)
-        val descripcion = aulaView.findViewById<EditText>(R.id.edDescripcionAula)
-        val curso = aulaView.findViewById<Spinner>(R.id.spCursoAula)
-        val encargado = aulaView.findViewById<Spinner>(R.id.spEncargadoAula)
-        val alumnos = aulaView.findViewById<EditText>(R.id.edAlumnosAula)
-        cargarCursos(curso)
-        cargarEncargados(encargado)
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.strTituloAddAula))
-            .setView(aulaView)
-            .setPositiveButton("OK") { view, _ ->
-                val aula = Aula(
-                    nombre.text.toString(),
-                    descripcion.text.toString(),
-                    Curso.valueOf(curso.selectedItem.toString()),
-                    encargado.selectedItem.toString(),
-                    alumnos.text.toString().toInt()
-                )
-                crearAula(aula)
-                view.dismiss()
-            }
-            .setNegativeButton(getString(R.string.strCancelar)) { view, _ ->
-                view.dismiss()
-            }
-            .setCancelable(false)
-            .create()
-            .show()
-    }
-
-    private fun crearAula(aula: Aula) {
-        val request = ServiceBuilder.buildService(InventarioApi::class.java)
-        val call = request.addAula(aula)
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>
-            ) {
-                if (response.code() == 200) {
-                    Toast.makeText(
-                        this@InterfazUsuarioActivity,
-                        getString(R.string.strOperacionExitosa),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else Toast.makeText(
-                    this@InterfazUsuarioActivity,
-                    "el aula ya existe",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Toast.makeText(
-                    this@InterfazUsuarioActivity,
-                    getString(R.string.strFalloConexion),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-    }
-
-    private fun cargarEncargados(encargado: Spinner) {
-        val request = ServiceBuilder.buildService(InventarioApi::class.java)
-        val call = request.getUsuarios()
-        call.enqueue(object : Callback<MutableList<Usuario>> {
-            override fun onResponse(
-                call: Call<MutableList<Usuario>>,
-                response: Response<MutableList<Usuario>>
-            ) {
-                if (response.code() == 200) {
-                    var usuarios = ArrayList<String>(0)
-                    for (post in response.body()!!) {
-                        usuarios.add(post.username.toString())
-                    }
-                    encargado.adapter = ArrayAdapter(
-                        this@InterfazUsuarioActivity,
-                        R.layout.encargados_list,
-                        R.id.txtEncargadoAulaItem,
-                        usuarios
-                    )
-                } else {
-                    Log.e("Fernando", "Algo ha fallado en el login.")
-                    Toast.makeText(
-                        this@InterfazUsuarioActivity,
-                        response.message().toString(),
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-            }
-
-            override fun onFailure(call: Call<MutableList<Usuario>>, t: Throwable) {
-                Toast.makeText(
-                    this@InterfazUsuarioActivity,
-                    getString(R.string.strFalloConexion),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-
-        })
-    }
-
-    private fun cargarCursos(curso: Spinner) {
-        val cursos = Curso.values()
-        curso.adapter = ArrayAdapter(this, R.layout.cursos_list, R.id.txtCurso, cursos)
     }
 
     private fun cargarUsuario() {
