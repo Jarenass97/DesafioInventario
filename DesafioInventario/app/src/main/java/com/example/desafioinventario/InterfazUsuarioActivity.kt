@@ -28,7 +28,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import model.Aula
 import model.Usuario
 import okhttp3.ResponseBody
+import org.jetbrains.anko.find
 import retrofit2.*
+import android.content.SharedPreferences
+
+
+
 
 class InterfazUsuarioActivity : AppCompatActivity() {
 
@@ -56,7 +61,8 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home
+                R.id.nav_home,
+                R.id.nav_perfil
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -70,17 +76,13 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         val img = header.findViewById<ImageView>(R.id.imgUsuarioNavigation)
         val username = header.findViewById<TextView>(R.id.txtUsernameNavigation)
         val email = header.findViewById<TextView>(R.id.txtEmailNavigation)
-        if (usuario.img != null) img.setImageBitmap(
+        if (!usuario.sinImagen()) img.setImageBitmap(
             Auxiliar.getImage(
                 usuario.img!!
             )
         )
         username.text = usuario.username
         email.text = usuario.email
-        if (usuario.isJefe()) {
-            val btnAddAula = findViewById<FloatingActionButton>(R.id.btnAddAula)
-            btnAddAula.isVisible = true
-        }
     }
 
 

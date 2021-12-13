@@ -87,5 +87,22 @@ def getUsuario(username):
     return resp
 
 
+@app.route("/modUser/<username>", methods=["PUT"])
+def modUsuario(username):
+    data = request.json
+    if (conexion.modificarPersona(username, data[USERNAME__USUARIOS],data[PASSWD__USUARIOS], data[EMAIL__USUARIOS],
+                                  data[IMAGE__USUARIOS]) > 0):
+        respuesta = {'message': 'Ok.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'Error al modificar.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+
+    print(resp)
+    return resp
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

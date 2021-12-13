@@ -158,3 +158,24 @@ class Conexion:
                 return r
         except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return []
+
+    def modificarPersona(self, username, newUsername, passwd, email, img):
+        """Insertar una persona en la tabla Personas."""
+        try:
+            self.conectar()
+            cursor = self._conexion.cursor()
+            if not img:
+                consulta = f"UPDATE {TABLA_USUARIOS} SET {USERNAME__USUARIOS} = '{newUsername}', " \
+                           f"{EMAIL__USUARIOS} = '{email}', {PASSWD__USUARIOS} = '{passwd}' " \
+                           f"WHERE {USERNAME__USUARIOS} = '{username}'"
+            else:
+                consulta = f"UPDATE {TABLA_USUARIOS} SET {USERNAME__USUARIOS} = '{newUsername}', " \
+                           f"{EMAIL__USUARIOS} = '{email}', {PASSWD__USUARIOS} = '{passwd}', " \
+                           f"{IMAGE__USUARIOS} = '{img}'  WHERE {USERNAME__USUARIOS} = '{username}'"
+            print(consulta)
+            cursor.execute(consulta)
+            self._conexion.commit()
+            self.cerrarConexion()
+            return cursor.rowcount
+        except (pymysql.err.IntegrityError) as e:
+            return -1

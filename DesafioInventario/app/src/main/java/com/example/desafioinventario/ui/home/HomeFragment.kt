@@ -2,12 +2,14 @@ package com.example.desafioinventario.ui.home
 
 import adapters.AulasAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,7 @@ class HomeFragment() : Fragment() {
     lateinit var rvAulas: RecyclerView
     lateinit var aulasAdapter: AulasAdapter
     lateinit var btnAddAula: FloatingActionButton
+    lateinit var usuario: Usuario
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +42,8 @@ class HomeFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val bun = requireActivity().intent.extras!!
+        usuario = bun.getSerializable("user") as Usuario
         rvAulas = view.findViewById(R.id.rvAulas)
         rvAulas.setHasFixedSize(true)
         rvAulas.layoutManager = LinearLayoutManager(context)
@@ -46,7 +51,14 @@ class HomeFragment() : Fragment() {
         btnAddAula.setOnClickListener(View.OnClickListener {
             dialogAula()
         })
+        cargarDatos()
         cargarAulas()
+    }
+
+    private fun cargarDatos() {
+        if (usuario.isJefe()) {
+            btnAddAula.isVisible = true
+        }
     }
 
 

@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34d7d31a-d8a0-4f78-84cb-1c1c77cc7c6a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/PerfilFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_person.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_save.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/fragment_perfil.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/password_changer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InterfazUsuarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InterfazUsuarioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/model/Usuario.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/model/Usuario.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/menu/activity_interfaz_usuario_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/menu/activity_interfaz_usuario_drawer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-es-rES/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-es-rES/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-fr-rFR/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-fr-rFR/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/Conexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/Conexion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +54,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../../ServicioWEB" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">

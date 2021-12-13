@@ -23,4 +23,8 @@ data class Usuario(
     fun isJefe(): Boolean {
         return roles.contains(Rol.JEFE_DEPARTAMENTO)
     }
+
+    fun sinImagen(): Boolean {
+        return img.contentEquals(byteArrayOf())
+    }
 }

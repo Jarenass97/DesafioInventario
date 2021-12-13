@@ -18,6 +18,10 @@ interface InventarioApi {
     fun addUser(@Body info: Usuario): Call<ResponseBody>
 
     @Headers("Content-Type:application/json")
+    @PUT("/modUser/{username}")
+    fun modUsuario(@Path("username") username: String, @Body info: Usuario): Call<ResponseBody>
+
+    @Headers("Content-Type:application/json")
     @POST("/addAula")
     fun addAula(@Body info: Aula): Call<ResponseBody>
 

@@ -31,4 +31,7 @@
     <string name="strTituloAddAula">New classroom</string>
     <string name="strCancelar">Cancel</string>
     <string name="strNombre">Name</string>
+    <string name="strEmail" translatable="false">E-mail</string>
+    <string name="strCambiarPassword">Change Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

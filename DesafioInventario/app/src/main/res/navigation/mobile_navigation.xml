@@ -10,5 +10,10 @@
         android:name="com.example.desafioinventario.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.example.desafioinventario.ui.home.PerfilFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
 
 </navigation>

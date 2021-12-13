@@ -31,4 +31,5 @@
     <string name="strTituloAddAula">Nueva aula</string>
     <string name="strCancelar">Cancelar</string>
     <string name="strNombre">Nombre</string>
+    <string name="strCambiarPassword">Cambiar Contraseña</string>
 </resources>
