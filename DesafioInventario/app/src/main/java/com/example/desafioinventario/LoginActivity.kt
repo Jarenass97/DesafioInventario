@@ -11,6 +11,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -47,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtMensajeReg: TextView
     lateinit var animaciones: Animacion
     lateinit var imgUser: ImageView
+    lateinit var btnMostrarPass: ImageButton
+    var passVisible = false
     var isLogin = true
     var photo: Bitmap? = null
     val contexto = this
@@ -68,6 +71,18 @@ class LoginActivity : AppCompatActivity() {
         edPass1Reg = findViewById(R.id.edPasswdReg)
         edPass2Reg = findViewById(R.id.edPasswd2Reg)
         txtMensajeReg = findViewById(R.id.txtMensajeErrorReg)
+        btnMostrarPass = findViewById(R.id.btnMostrarPassword)
+        btnMostrarPass.setOnClickListener(View.OnClickListener {
+            passVisible = !passVisible
+            if (passVisible) {
+                btnMostrarPass.setImageResource(R.drawable.ic_eye_closed)
+                edPasswdLogin.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                btnMostrarPass.setImageResource(R.drawable.ic_eye)
+                edPasswdLogin.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            edPasswdLogin.setSelection(edPasswdLogin.text.length)
+        })
         ocultarMsgs()
 
         val txtRegistrar = findViewById<TextView>(R.id.txtRegistrar)

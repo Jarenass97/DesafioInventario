@@ -16,6 +16,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
@@ -23,6 +24,7 @@ import assistant.Auxiliar
 import assistant.Curso
 import com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding
 import com.example.desafioinventario.ui.home.HomeFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import model.Aula
 import model.Usuario
 import okhttp3.ResponseBody
@@ -75,13 +77,12 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         )
         username.text = usuario.username
         email.text = usuario.email
+        if (usuario.isJefe()) {
+            val btnAddAula = findViewById<FloatingActionButton>(R.id.btnAddAula)
+            btnAddAula.isVisible = true
+        }
     }
 
-    private fun replaceFragment(fragment: HomeFragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-        fragmentTransaction.commit()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

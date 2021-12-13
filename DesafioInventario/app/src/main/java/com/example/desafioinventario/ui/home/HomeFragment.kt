@@ -2,7 +2,6 @@ package com.example.desafioinventario.ui.home
 
 import adapters.AulasAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,13 +28,13 @@ class HomeFragment() : Fragment() {
     lateinit var rvAulas: RecyclerView
     lateinit var aulasAdapter: AulasAdapter
     lateinit var btnAddAula: FloatingActionButton
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater?.inflate(R.layout.fragment_home, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,7 +98,6 @@ class HomeFragment() : Fragment() {
         val alumnos = aulaView.findViewById<EditText>(R.id.edAlumnosAula)
         cargarCursos(curso)
         cargarEncargados(encargado)
-        Thread.sleep(500)
         AlertDialog.Builder(requireContext())
             .setIcon(R.drawable.ic_class)
             .setTitle(getString(R.string.strTituloAddAula))
