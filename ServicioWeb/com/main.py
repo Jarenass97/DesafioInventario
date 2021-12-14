@@ -90,7 +90,7 @@ def getUsuario(username):
 @app.route("/modUser/<username>", methods=["PUT"])
 def modUsuario(username):
     data = request.json
-    if (conexion.modificarPersona(username, data[USERNAME__USUARIOS],data[PASSWD__USUARIOS], data[EMAIL__USUARIOS],
+    if (conexion.modificarUsuario(username, data[USERNAME__USUARIOS], data[PASSWD__USUARIOS], data[EMAIL__USUARIOS],
                                   data[IMAGE__USUARIOS]) > 0):
         respuesta = {'message': 'Ok.'}
         resp = jsonify(respuesta)
@@ -99,8 +99,34 @@ def modUsuario(username):
         respuesta = {'message': 'Error al modificar.'}
         resp = jsonify(respuesta)
         resp.status_code = 400
+    return resp
 
-    print(resp)
+
+@app.route("/modAula/<nombre>", methods=["PUT"])
+def modAula(nombre):
+    data = request.json
+    if (conexion.modificarAula(nombre, data[NOMBRE__AULAS], data[DESCRIPCION__AULAS], data[CURSO_IMPARTIDO__AULAS],
+                               data[ENCARGADO__AULAS], data[NUM_ALUMNOS__AULAS]) > 0):
+        respuesta = {'message': 'Ok.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'Error al modificar.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
+@app.route("/delAula/<nombre>", methods=["DELETE"])
+def delPersona(nombre):
+    if (conexion.borrarAula(nombre) > 0):
+        respuesta = {'message': 'Ok.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'Aula' + str(nombre) + ' no encontrado.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
     return resp
 
 

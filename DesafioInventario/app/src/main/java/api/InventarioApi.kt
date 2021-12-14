@@ -27,4 +27,11 @@ interface InventarioApi {
 
     @GET("/aulas")
     fun getAulas(): Call<MutableList<Aula>>
+
+    @Headers("Content-Type:application/json")
+    @PUT("/modAula/{nombre}")
+    fun modAula(@Path("nombre") nombre:String, @Body info: Aula): Call<ResponseBody>
+
+    @DELETE("delAula/{nombre}")
+    fun deleteAula(@Path("nombre") nombre: String) : Call<ResponseBody>
 }

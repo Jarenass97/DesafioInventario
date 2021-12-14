@@ -5,17 +5,28 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
+import api.InventarioApi
+import api.ServiceBuilder
+import assistant.Curso
 import com.example.desafioinventario.R
+import com.google.android.material.navigation.NavigationView
 import model.Aula
+import model.Usuario
+import okhttp3.ResponseBody
 import org.jetbrains.anko.find
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AulasAdapter(
     var context: AppCompatActivity,
-    var aulas: ArrayList<Aula>
+    var aulas: ArrayList<Aula>,
+    val usuario: Usuario
 ) :
     RecyclerView.Adapter<AulasAdapter.ViewHolder>() {
 
@@ -25,7 +36,11 @@ class AulasAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ViewHolder(layoutInflater.inflate(R.layout.aulas_item, parent, false), context)
+        return ViewHolder(
+            layoutInflater.inflate(R.layout.aulas_item, parent, false),
+            context,
+            usuario
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -48,7 +63,8 @@ class AulasAdapter(
         }
     }
 
-    class ViewHolder(view: View, ventana: AppCompatActivity) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, val ventana: AppCompatActivity, val usuario: Usuario) :
+        RecyclerView.ViewHolder(view) {
         val txtNombre = view.findViewById<TextView>(R.id.txtNombreAulaItem)
         val txtCurso = view.findViewById<TextView>(R.id.txtCursoAulaItem)
         val icono = view.findViewById<ImageView>(R.id.icAulaItem)
@@ -69,12 +85,238 @@ class AulasAdapter(
             }
             itemView.setOnClickListener(View.OnClickListener {
                 marcarSeleccion(aulasAdapter, pos)
+                if (usuario.isJefe()) {
+                    dialogAula(aula, aulasAdapter)
+                }
+            })
+            itemView.setOnLongClickListener(View.OnLongClickListener {
+                marcarSeleccion(aulasAdapter, pos)
+                if (usuario.isJefe()) {
+                    preguntarBorrado(aula, aulasAdapter)
+                }
+                true
             })
         }
 
+        private fun deleteAula(aula: Aula, aulasAdapter: AulasAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.deleteAula(aula.nombre)
+            call.enqueue(object : Callback<ResponseBody> {
+
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(
+                            ventana,
+                            ventana.getString(R.string.strOperacionExitosa),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        recargarAulas(aulasAdapter)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+            })
+        }
+
+        private fun preguntarBorrado(aula: Aula, aulasAdapter: AulasAdapter) {
+            AlertDialog.Builder(ventana)
+                .setTitle(ventana.getString(R.string.strTituloBorrar))
+                .setMessage(ventana.getString(R.string.strMensajeBorrar))
+                .setPositiveButton("OK") { view, _ ->
+                    deleteAula(aula, aulasAdapter)
+                    view.dismiss()
+                }
+                .setNegativeButton(ventana.getString(R.string.strCancelar)){view,_->
+                    view.dismiss()
+                }
+                .create()
+                .show()
+        }
+
+        private fun dialogAula(aula: Aula, aulasAdapter: AulasAdapter) {
+            val identificador = aula.nombre
+            val aulaView = ventana.layoutInflater.inflate(R.layout.aulas_creater, null)
+            val nombre = aulaView.findViewById<EditText>(R.id.edNombreAula)
+            val descripcion = aulaView.findViewById<EditText>(R.id.edDescripcionAula)
+            val curso = aulaView.findViewById<Spinner>(R.id.spCursoAula)
+            val encargado = aulaView.findViewById<Spinner>(R.id.spEncargadoAula)
+            val alumnos = aulaView.findViewById<EditText>(R.id.edAlumnosAula)
+            nombre.append(aula.nombre)
+            descripcion.append(aula.descripcion)
+            cargarCursos(curso, aula.curso)
+            cargarEncargados(encargado, aula.encargado)
+            alumnos.append(aula.numAlumnos.toString())
+            AlertDialog.Builder(ventana)
+                .setIcon(R.drawable.ic_class)
+                .setTitle(ventana.getString(R.string.strTituloModAula))
+                .setView(aulaView)
+                .setPositiveButton("OK") { view, _ ->
+                    if (!camposVacios(nombre, descripcion, alumnos)) {
+                        val aula = Aula(
+                            nombre.text.toString(),
+                            descripcion.text.toString(),
+                            Curso.valueOf(curso.selectedItem.toString()),
+                            encargado.selectedItem.toString(),
+                            alumnos.text.toString().toInt()
+                        )
+                        modAula(identificador, aula, aulasAdapter)
+                    } else {
+                        Toast.makeText(
+                            ventana,
+                            ventana.getString(R.string.strCamposVacios),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                    view.dismiss()
+                }
+                .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
+                    view.dismiss()
+                }
+                .setCancelable(false)
+                .create()
+                .show()
+        }
+
+        private fun modAula(nombre: String, aula: Aula, aulasAdapter: AulasAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.modAula(nombre, aula)
+            call.enqueue(object : Callback<ResponseBody> {
+
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(
+                            ventana,
+                            ventana.getString(R.string.strOperacionExitosa),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        recargarAulas(aulasAdapter)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+            })
+        }
+
+        private fun recargarAulas(aulasAdapter: AulasAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.getAulas()
+            call.enqueue(object : Callback<MutableList<Aula>> {
+                override fun onResponse(
+                    call: Call<MutableList<Aula>>,
+                    response: Response<MutableList<Aula>>
+                ) {
+                    if (response.code() == 200) {
+                        val aulas = ArrayList<Aula>(0)
+                        for (aula in response.body()!!) {
+                            aulas.add(aula)
+                        }
+                        aulasAdapter.aulas = aulas
+                        aulasAdapter.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(
+                            ventana,
+                            response.message().toString(),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MutableList<Aula>>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+        }
+
+        private fun camposVacios(
+            nombre: EditText,
+            descripcion: EditText,
+            alumnos: EditText
+        ): Boolean {
+            return nombre.text.isEmpty() || descripcion.text.isEmpty() || alumnos.text.isEmpty()
+        }
+
+        private fun cargarEncargados(encargado: Spinner, userEncargado: String?) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.getUsuarios()
+            call.enqueue(object : Callback<MutableList<Usuario>> {
+                override fun onResponse(
+                    call: Call<MutableList<Usuario>>,
+                    response: Response<MutableList<Usuario>>
+                ) {
+                    if (response.code() == 200) {
+                        var usuarios = ArrayList<String>(0)
+                        for (post in response.body()!!) {
+                            if(post.isEncargado()) usuarios.add(post.username)
+                        }
+                        encargado.adapter = ArrayAdapter(
+                            ventana,
+                            R.layout.encargados_list,
+                            R.id.txtEncargadoAulaItem,
+                            usuarios
+                        )
+                        if (userEncargado != null) encargado.setSelection(
+                            usuarios.indexOf(
+                                userEncargado
+                            )
+                        )
+                    } else {
+                        Toast.makeText(
+                            ventana,
+                            response.message().toString(),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MutableList<Usuario>>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            })
+        }
+
+        private fun cargarCursos(curso: Spinner, cursoAula: Curso) {
+            val cursos = Curso.values()
+            curso.adapter =
+                ArrayAdapter(ventana, R.layout.cursos_list, R.id.txtCurso, cursos)
+            curso.setSelection(cursos.indexOf(cursoAula))
+        }
+
         private fun marcarSeleccion(aulasAdapter: AulasAdapter, pos: Int) {
-            seleccionado = if (pos == seleccionado) -1
-            else pos
+            seleccionado = pos
             aulasAdapter.notifyDataSetChanged()
         }
     }

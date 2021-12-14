@@ -23,7 +23,7 @@
     <string name="strTituloCerrarSesion">Se déconnecter</string>
     <string name="strMensajeCerrarSesion">Voulez-vous vous déconnecter ?</string>
     <string name="action_settings">Les paramètres</string>
-    <string name="menu_home">point de départ</string>
+    <string name="menu_aulas">Salles de classe</string>
     <string name="strAula">" salle de cours"</string>
     <string name="strCurso">Cours</string>
     <string name="strDescripcion">" la description"</string>
@@ -32,4 +32,8 @@
     <string name="strCancelar">Annuler</string>
     <string name="strNombre">Nom</string>
     <string name="strCambiarPassword">Changer le mot de passe</string>
+    <string name="strTituloBorrar">effacer</string>
+    <string name="strMensajeBorrar">Voulez-vous supprimer l\'élément sélectionné ?</string>
+    <string name="menu_perfil">Profil</string>
+    <string name="strTituloModAula">" Modifier la classe"</string>
 </resources>

@@ -159,8 +159,7 @@ class Conexion:
         except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return []
 
-    def modificarPersona(self, username, newUsername, passwd, email, img):
-        """Insertar una persona en la tabla Personas."""
+    def modificarUsuario(self, username, newUsername, passwd, email, img):
         try:
             self.conectar()
             cursor = self._conexion.cursor()
@@ -179,3 +178,32 @@ class Conexion:
             return cursor.rowcount
         except (pymysql.err.IntegrityError) as e:
             return -1
+
+    def modificarAula(self, nombre, new_nombre, desc, curso, encargado, num_alumnos):
+        try:
+            self.conectar()
+            cursor = self._conexion.cursor()
+            consulta = f"UPDATE {TABLA__AULAS} SET {NOMBRE__AULAS} = '{new_nombre}', " \
+                       f"{DESCRIPCION__AULAS} = '{desc}', {CURSO_IMPARTIDO__AULAS} = '{curso}', " \
+                       f"{ENCARGADO__AULAS} = '{encargado}', {NUM_ALUMNOS__AULAS} = {num_alumnos} " \
+                       f"WHERE {NOMBRE__AULAS} = '{nombre}'"
+            print(consulta)
+            cursor.execute(consulta)
+            self._conexion.commit()
+            self.cerrarConexion()
+            return cursor.rowcount
+        except (pymysql.err.IntegrityError) as e:
+            return -1
+
+    def borrarAula(self, nombre):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"DELETE FROM {TABLA__AULAS} WHERE {NOMBRE__AULAS} = '{nombre}'"
+                cursor.execute(consulta)
+                self._conexion.commit()
+                self.cerrarConexion()
+                return cursor.rowcount
+        except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return -1
+

@@ -23,7 +23,7 @@
     <string name="strTituloCerrarSesion">Cerrar sesión</string>
     <string name="strMensajeCerrarSesion">¿Desea cerrar sesión?</string>
     <string name="action_settings">Ajustes</string>
-    <string name="menu_home">Inicio</string>
+    <string name="menu_aulas">Aulas</string>
     <string name="strAula">Aula</string>
     <string name="strCurso">Curso</string>
     <string name="strDescripcion">Descripción</string>
@@ -32,4 +32,8 @@
     <string name="strCancelar">Cancelar</string>
     <string name="strNombre">Nombre</string>
     <string name="strCambiarPassword">Cambiar Contraseña</string>
+    <string name="strTituloBorrar">Borrar</string>
+    <string name="strMensajeBorrar">¿Desea eliminar el elemento seleccionado?</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="strTituloModAula">Modificar Aula</string>
 </resources>

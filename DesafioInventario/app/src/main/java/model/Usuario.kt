@@ -27,4 +27,8 @@ data class Usuario(
     fun sinImagen(): Boolean {
         return img.contentEquals(byteArrayOf())
     }
+
+    fun isEncargado(): Boolean {
+        return roles.contains(Rol.ENCARGADO)
+    }
 }

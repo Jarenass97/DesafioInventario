@@ -2,7 +2,6 @@ package com.example.desafioinventario.ui.home
 
 import adapters.AulasAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment() : Fragment() {
+class AulasFragment() : Fragment() {
 
     lateinit var rvAulas: RecyclerView
     lateinit var aulasAdapter: AulasAdapter
@@ -37,7 +36,7 @@ class HomeFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_aulas, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,7 +74,7 @@ class HomeFragment() : Fragment() {
                     for (aula in response.body()!!) {
                         aulas.add(aula)
                     }
-                    newAulasAdapter(AulasAdapter(context as AppCompatActivity, aulas))
+                    newAulasAdapter(AulasAdapter(context as AppCompatActivity, aulas, usuario))
                 } else {
                     Toast.makeText(
                         context,
@@ -186,7 +185,7 @@ class HomeFragment() : Fragment() {
                 if (response.code() == 200) {
                     var usuarios = ArrayList<String>(0)
                     for (post in response.body()!!) {
-                        usuarios.add(post.username.toString())
+                        if (post.isEncargado()) usuarios.add(post.username)
                     }
                     encargado.adapter = ArrayAdapter(
                         context!!,

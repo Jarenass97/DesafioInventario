@@ -23,7 +23,7 @@
     <string name="strMensajeCerrarSesion">Do you want to log out?</string>
     <string name="title_activity_interfaz_usuario" translatable="false">InterfazUsuarioActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="menu_home">Home</string>
+    <string name="menu_aulas">Classrooms</string>
     <string name="strAula">Classroom</string>
     <string name="strCurso">Course</string>
     <string name="strDescripcion">Description</string>
@@ -33,5 +33,9 @@
     <string name="strNombre">Name</string>
     <string name="strEmail" translatable="false">E-mail</string>
     <string name="strCambiarPassword">Change Password</string>
+    <string name="strTituloBorrar">Delete</string>
+    <string name="strMensajeBorrar">Do you want to delete the selected item?</string>
+    <string name="menu_perfil">Profile</string>
+    <string name="strTituloModAula">Modify classroom</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

@@ -3,7 +3,6 @@ package com.example.desafioinventario
 import adapters.AulasAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.*
@@ -16,23 +15,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import api.InventarioApi
-import api.ServiceBuilder
 import assistant.Auxiliar
-import assistant.Curso
 import com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding
-import com.example.desafioinventario.ui.home.HomeFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import model.Aula
 import model.Usuario
-import okhttp3.ResponseBody
-import org.jetbrains.anko.find
 import retrofit2.*
-import android.content.SharedPreferences
-
-
 
 
 class InterfazUsuarioActivity : AppCompatActivity() {
@@ -61,7 +48,7 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
+                R.id.nav_aulas,
                 R.id.nav_perfil
             ), drawerLayout
         )
