@@ -175,7 +175,7 @@ class Conexion:
         except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return []
 
-    def modificarUsuario(self, username, newUsername, passwd, email, img):
+    def modificarUsuario(self, username, newUsername, passwd, email, roles, img):
         try:
             self.conectar()
             cursor = self._conexion.cursor()
@@ -187,8 +187,20 @@ class Conexion:
                 consulta = f"UPDATE {TABLA_USUARIOS} SET {USERNAME__USUARIOS} = '{newUsername}', " \
                            f"{EMAIL__USUARIOS} = '{email}', {PASSWD__USUARIOS} = '{passwd}', " \
                            f"{IMAGE__USUARIOS} = '{img}'  WHERE {USERNAME__USUARIOS} = '{username}'"
-            print(consulta)
             cursor.execute(consulta)
+            consulta = f"DELETE FROM {TABLA__USER_ROLES} WHERE {ID_USER__USER_ROLES} = '{newUsername}'"
+            cursor.execute(consulta)
+            for rol in roles:
+                id_rol = 0
+                if rol == JEFE_DEPARTAMENTO:
+                    id_rol = 1
+                elif rol == ENCARGADO:
+                    id_rol = 2
+                elif rol == PROFESOR:
+                    id_rol = 3
+                consulta = f"INSERT INTO {TABLA__USER_ROLES}({ID_USER__USER_ROLES}, {ID_ROL__USER_ROLES}) " \
+                           f"values ('{newUsername}',{id_rol}) "
+                cursor.execute(consulta)
             self._conexion.commit()
             self.cerrarConexion()
             return cursor.rowcount

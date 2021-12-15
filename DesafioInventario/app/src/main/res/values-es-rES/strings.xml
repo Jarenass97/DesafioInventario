@@ -37,4 +37,5 @@
     <string name="menu_perfil">Perfil</string>
     <string name="strTituloModAula">Modificar Aula</string>
     <string name="menu_usuarios">Administrar usuarios</string>
+    <string name="strTituloModUser">Modificar usuario</string>
 </resources>

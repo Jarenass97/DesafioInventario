@@ -104,7 +104,7 @@ def getUsuario(username):
 def modUsuario(username):
     data = request.json
     if (conexion.modificarUsuario(username, data[USERNAME__USUARIOS], data[PASSWD__USUARIOS], data[EMAIL__USUARIOS],
-                                  data[IMAGE__USUARIOS]) > 0):
+                                  data[ARRAY_ROLES], data[IMAGE__USUARIOS]) > 0):
         respuesta = {'message': 'Ok.'}
         resp = jsonify(respuesta)
         resp.status_code = 200

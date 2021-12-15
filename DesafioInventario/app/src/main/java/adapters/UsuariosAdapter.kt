@@ -1,6 +1,8 @@
 package adapters
 
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
 import assistant.Auxiliar
+import assistant.Rol
 import com.example.desafioinventario.R
+import com.google.android.material.navigation.NavigationView
 import model.Aula
 import model.Usuario
 import okhttp3.ResponseBody
@@ -72,7 +76,7 @@ class UsuariosAdapter(
             pos: Int,
             usuariosAdapter: UsuariosAdapter
         ) {
-            if(!usuario.sinImagen()) imgUsuario.setImageBitmap(Auxiliar.getImage(usuario.img!!))
+            if (!usuario.sinImagen()) imgUsuario.setImageBitmap(Auxiliar.getImage(usuario.img!!))
             txtUsername.text =
                 if (usuario.username == usuarioConectado.username) "${usuario.username}(tú)"
                 else usuario.username
@@ -90,11 +94,118 @@ class UsuariosAdapter(
             }
             itemView.setOnClickListener(View.OnClickListener {
                 marcarSeleccion(usuariosAdapter, pos)
+                dialogUser(usuario, usuariosAdapter)
             })
             itemView.setOnLongClickListener(View.OnLongClickListener {
                 marcarSeleccion(usuariosAdapter, pos)
                 preguntarBorrado(usuario, usuariosAdapter)
                 true
+            })
+        }
+
+        private fun dialogUser(usuario: Usuario, usuariosAdapter: UsuariosAdapter) {
+            val username = usuario.username
+            val dialog = ventana.layoutInflater.inflate(R.layout.usuarios_modifier, null)
+            val edUsername = dialog.findViewById<EditText>(R.id.edUsernameModifier)
+            val edPass = dialog.findViewById<EditText>(R.id.edPassModifier)
+            val edEmail = dialog.findViewById<EditText>(R.id.edEmailModifier)
+            val ckbJefe = dialog.findViewById<CheckBox>(R.id.ckbJefeModifier)
+            val ckbEncargado = dialog.findViewById<CheckBox>(R.id.ckbEncargadoModifier)
+            val ckbProfesor = dialog.findViewById<CheckBox>(R.id.ckbProfesorModifier)
+            cargarDatos(usuario, edUsername, edPass, edEmail, ckbJefe, ckbEncargado, ckbProfesor)
+            AlertDialog.Builder(ventana)
+                .setTitle(ventana.getString(R.string.strTituloModUser))
+                .setView(dialog)
+                .setPositiveButton("OK") { view, _ ->
+                    if (!camposVacios(
+                            edUsername,
+                            edPass,
+                            edEmail,
+                            ckbJefe,
+                            ckbEncargado,
+                            ckbProfesor
+                        )
+                    ) {
+                        usuario.username = edUsername.text.toString()
+                        usuario.passwd = edPass.text.toString()
+                        usuario.email = edEmail.text.toString()
+                        val roles = ArrayList<Rol>(0)
+                        if (ckbJefe.isChecked) roles.add(Rol.JEFE_DEPARTAMENTO)
+                        if (ckbEncargado.isChecked) roles.add(Rol.ENCARGADO)
+                        if (ckbProfesor.isChecked) roles.add(Rol.PROFESOR)
+                        usuario.roles = roles
+                        for (rol in usuario.roles){
+                            Log.e("jorge", rol.toString())
+                        }
+                        modUser(username, usuario, usuariosAdapter)
+                    }
+                    view.dismiss()
+                }
+                .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
+                    view.dismiss()
+                }
+                .setCancelable(false).create().show()
+        }
+
+        private fun cargarDatos(
+            usuario: Usuario,
+            edUsername: EditText,
+            edPass: EditText,
+            edEmail: EditText,
+            ckbJefe: CheckBox,
+            ckbEncargado: CheckBox,
+            ckbProfesor: CheckBox
+        ) {
+            edUsername.text.apply { clear();append(usuario.username) }
+            edPass.text.apply { clear();append(usuario.passwd) }
+            edEmail.text.apply { clear();append(usuario.email) }
+            if (usuario.isJefe()) ckbJefe.isChecked = true
+            if (usuario.isEncargado()) ckbEncargado.isChecked = true
+            if (usuario.isProfesor()) ckbProfesor.isChecked = true
+        }
+
+        private fun camposVacios(
+            edUsername: EditText,
+            edPass: EditText,
+            edEmail: EditText,
+            ckbJefe: CheckBox,
+            ckbEncargado: CheckBox,
+            ckbProfesor: CheckBox
+        ): Boolean {
+            return edUsername.text.isEmpty() ||
+                    edPass.text.isEmpty() ||
+                    edEmail.text.isEmpty() ||
+                    (!ckbJefe.isChecked && !ckbEncargado.isChecked && !ckbProfesor.isChecked)
+        }
+
+        private fun modUser(username: String, usuario: Usuario, usuariosAdapter: UsuariosAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.modUsuario(username, usuario)
+            call.enqueue(object : Callback<ResponseBody> {
+
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(
+                            ventana,
+                            ventana.getString(R.string.strOperacionExitosa),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        recargarUsuarios(usuariosAdapter)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
             })
         }
 
