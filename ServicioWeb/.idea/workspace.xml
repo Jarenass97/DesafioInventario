@@ -2,26 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34d7d31a-d8a0-4f78-84cb-1c1c77cc7c6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/classroom.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/AulasAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/AulasAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InterfazUsuarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InterfazUsuarioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/AulasFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/AulasFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/ui/home/AulasFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/model/Usuario.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/model/Usuario.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_menu_camera.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_menu_gallery.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/ic_menu_slideshow.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/drawable/side_nav_bar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/fragment_aulas.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/nav_header_interfaz_usuario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/nav_header_interfaz_usuario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/menu/activity_interfaz_usuario_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/menu/activity_interfaz_usuario_drawer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-es-rES/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-es-rES/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-fr-rFR/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-fr-rFR/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/xml/network_security_config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/xml/network_security_config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com/Conexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/Conexion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/main.py" afterDir="false" />

@@ -74,6 +74,19 @@ def getAulas():
     return resp
 
 
+@app.route('/aulas/<encargado>', methods=['GET'])
+def getAulasEncargado(encargado):
+    lista = conexion.getAulasEncargado(encargado)
+    if len(lista) != 0:
+        resp = jsonify(lista)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'No existen aulas.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
 @app.route("/usuario/<username>", methods=['GET'])
 def getUsuario(username):
     usuarios = conexion.getUsuario(username)
@@ -119,7 +132,7 @@ def modAula(nombre):
 
 @app.route("/delAula/<nombre>", methods=["DELETE"])
 def delPersona(nombre):
-    if (conexion.borrarAula(nombre) > 0):
+    if conexion.borrarAula(nombre) > 0:
         respuesta = {'message': 'Ok.'}
         resp = jsonify(respuesta)
         resp.status_code = 200

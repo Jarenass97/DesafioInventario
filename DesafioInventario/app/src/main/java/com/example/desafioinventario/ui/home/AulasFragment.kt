@@ -63,7 +63,9 @@ class AulasFragment() : Fragment() {
 
     private fun cargarAulas() {
         val request = ServiceBuilder.buildService(InventarioApi::class.java)
-        val call = request.getAulas()
+        val call = if (!usuario.isJefe() && !usuario.isProfesor() && usuario.isEncargado())
+            request.getAulasEncargado(usuario.username)
+        else request.getAulas()
         call.enqueue(object : Callback<MutableList<Aula>> {
             override fun onResponse(
                 call: Call<MutableList<Aula>>,

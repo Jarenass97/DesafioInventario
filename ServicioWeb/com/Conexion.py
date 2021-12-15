@@ -120,8 +120,8 @@ class Conexion:
                     usuario[Constantes.IMAGE__USUARIOS] = image
                 del cursor
                 cursor = self._conexion.cursor()
-                consulta = f"SELECT {Constantes.ID_ROL__USER_ROLES} FROM {Constantes.TABLA__USER_ROLES} WHERE {Constantes.ID_USER__USER_ROLES} in (SELECT {Constantes.USERNAME__USUARIOS} FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = %s)"
-                cursor.execute(consulta, username)
+                consulta = f"SELECT {Constantes.ID_ROL__USER_ROLES} FROM {Constantes.TABLA__USER_ROLES} WHERE {Constantes.ID_USER__USER_ROLES} in (SELECT {Constantes.USERNAME__USUARIOS} FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = '{username}')"
+                cursor.execute(consulta)
                 r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
                      cursor.fetchall()]
                 if r:
@@ -159,6 +159,19 @@ class Conexion:
         except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return []
 
+    def getAulasEncargado(self, encargado):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"SELECT * FROM {TABLA__AULAS} where {ENCARGADO__AULAS} = '{encargado}'"
+                cursor.execute(consulta)
+                r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
+                     cursor.fetchall()]
+                self.cerrarConexion()
+                return r
+        except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return []
+
     def modificarUsuario(self, username, newUsername, passwd, email, img):
         try:
             self.conectar()
@@ -187,7 +200,6 @@ class Conexion:
                        f"{DESCRIPCION__AULAS} = '{desc}', {CURSO_IMPARTIDO__AULAS} = '{curso}', " \
                        f"{ENCARGADO__AULAS} = '{encargado}', {NUM_ALUMNOS__AULAS} = {num_alumnos} " \
                        f"WHERE {NOMBRE__AULAS} = '{nombre}'"
-            print(consulta)
             cursor.execute(consulta)
             self._conexion.commit()
             self.cerrarConexion()
@@ -206,4 +218,3 @@ class Conexion:
                 return cursor.rowcount
         except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return -1
-

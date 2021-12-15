@@ -31,4 +31,8 @@ data class Usuario(
     fun isEncargado(): Boolean {
         return roles.contains(Rol.ENCARGADO)
     }
+
+    fun isProfesor(): Boolean {
+        return roles.contains(Rol.PROFESOR)
+    }
 }
