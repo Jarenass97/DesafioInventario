@@ -134,11 +134,8 @@ class UsuariosAdapter(
                         if (ckbEncargado.isChecked) roles.add(Rol.ENCARGADO)
                         if (ckbProfesor.isChecked) roles.add(Rol.PROFESOR)
                         usuario.roles = roles
-                        for (rol in usuario.roles){
-                            Log.e("jorge", rol.toString())
-                        }
                         modUser(username, usuario, usuariosAdapter)
-                    }
+                    }else Toast.makeText(ventana, ventana.getString(R.string.strCamposVacios), Toast.LENGTH_SHORT).show()
                     view.dismiss()
                 }
                 .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
