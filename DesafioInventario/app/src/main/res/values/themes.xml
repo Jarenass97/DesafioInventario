@@ -46,7 +46,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="texto_item_aula" parent="Theme.DesafioInventario">
+    <style name="texto_item" parent="Theme.DesafioInventario">
         <item name="android:textSize">20dp</item>
     </style>
     <style name="Theme.DesafioInventario.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

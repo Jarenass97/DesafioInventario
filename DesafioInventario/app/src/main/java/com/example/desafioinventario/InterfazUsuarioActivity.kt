@@ -3,6 +3,7 @@ package com.example.desafioinventario
 import adapters.AulasAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.*
@@ -15,6 +16,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import assistant.Auxiliar
 import com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding
@@ -51,7 +54,8 @@ class InterfazUsuarioActivity : AppCompatActivity() {
                 R.id.nav_aulas,
                 R.id.nav_usuarios,
                 R.id.nav_perfil
-            ), drawerLayout
+            ),
+            drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -71,6 +75,10 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         )
         username.text = usuario.username
         email.text = usuario.email
+        if (!usuario.isJefe()) {
+            val nav_Menu: Menu = navigationView.menu
+            nav_Menu.findItem(R.id.nav_usuarios).isVisible = false
+        }
     }
 
 

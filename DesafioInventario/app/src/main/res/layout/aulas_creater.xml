@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/texto_item_aula"
+        style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -38,7 +38,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        style="@style/texto_item_aula"
+        style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -70,7 +70,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/texto_item_aula"
+        style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/textView4"
-        style="@style/texto_item_aula"
+        style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -124,7 +124,7 @@
 
     <TextView
         android:id="@+id/textView5"
-        style="@style/texto_item_aula"
+        style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
