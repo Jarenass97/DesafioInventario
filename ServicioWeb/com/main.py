@@ -115,6 +115,18 @@ def modUsuario(username):
     return resp
 
 
+@app.route("/delUsuario/<username>", methods=["DELETE"])
+def delUser(username):
+    if conexion.borrarUsuario(username) > 0:
+        respuesta = {'message': 'Ok.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'Usuario' + str(username) + ' no encontrado.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
 @app.route("/modAula/<nombre>", methods=["PUT"])
 def modAula(nombre):
     data = request.json
@@ -131,7 +143,7 @@ def modAula(nombre):
 
 
 @app.route("/delAula/<nombre>", methods=["DELETE"])
-def delPersona(nombre):
+def delAula(nombre):
     if conexion.borrarAula(nombre) > 0:
         respuesta = {'message': 'Ok.'}
         resp = jsonify(respuesta)

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
-import assistant.Curso
+import assistant.Auxiliar
 import com.example.desafioinventario.R
 import model.Aula
 import model.Usuario
@@ -61,6 +61,7 @@ class UsuariosAdapter(
 
     class ViewHolder(view: View, val ventana: AppCompatActivity, val usuarioConectado: Usuario) :
         RecyclerView.ViewHolder(view) {
+        val imgUsuario = view.findViewById<ImageView>(R.id.imgUsuarioItem)
         val txtUsername = view.findViewById<TextView>(R.id.txtUsernameItem)
         val lblRoles = view.findViewById<TextView>(R.id.lblRolesUsuarioItem)
         val txtRoles = view.findViewById<TextView>(R.id.txtRolesItem)
@@ -71,8 +72,10 @@ class UsuariosAdapter(
             pos: Int,
             usuariosAdapter: UsuariosAdapter
         ) {
-            txtUsername.text = if(usuario.username==usuarioConectado.username)"${usuario.username}(tú)"
-            else usuario.username
+            if(!usuario.sinImagen()) imgUsuario.setImageBitmap(Auxiliar.getImage(usuario.img!!))
+            txtUsername.text =
+                if (usuario.username == usuarioConectado.username) "${usuario.username}(tú)"
+                else usuario.username
             txtRoles.text = rolesToString(usuario)
             if (pos == seleccionado) {
                 with(itemView) { setBackgroundResource(R.color.onPrimaryDark) }
@@ -90,7 +93,7 @@ class UsuariosAdapter(
             })
             itemView.setOnLongClickListener(View.OnLongClickListener {
                 marcarSeleccion(usuariosAdapter, pos)
-                preguntarBorrado(usuario,usuariosAdapter)
+                preguntarBorrado(usuario, usuariosAdapter)
                 true
             })
         }
@@ -109,7 +112,8 @@ class UsuariosAdapter(
                 .setTitle(ventana.getString(R.string.strTituloBorrar))
                 .setMessage(ventana.getString(R.string.strMensajeBorrar))
                 .setPositiveButton("OK") { view, _ ->
-                    //Borrar usuario
+                    borrarUsuario(usuario, usuariosAdapter)
+                    marcarSeleccion(usuariosAdapter, -1)
                     view.dismiss()
                 }
                 .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
@@ -117,6 +121,71 @@ class UsuariosAdapter(
                 }
                 .create()
                 .show()
+        }
+
+        private fun borrarUsuario(usuario: Usuario, usuariosAdapter: UsuariosAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.deleteUsuario(usuario.username)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(
+                            ventana,
+                            ventana.getString(R.string.strOperacionExitosa),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        recargarUsuarios(usuariosAdapter)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+            })
+        }
+
+        private fun recargarUsuarios(usuariosAdapter: UsuariosAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.getUsuarios()
+            call.enqueue(object : Callback<MutableList<Usuario>> {
+                override fun onResponse(
+                    call: Call<MutableList<Usuario>>,
+                    response: Response<MutableList<Usuario>>
+                ) {
+                    if (response.code() == 200) {
+                        val usuarios = ArrayList<Usuario>(0)
+                        for (user in response.body()!!) {
+                            usuarios.add(user)
+                        }
+                        usuariosAdapter.usuarios = usuarios
+                        usuariosAdapter.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(
+                            ventana,
+                            response.message().toString(),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MutableList<Usuario>>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
         }
 
         private fun marcarSeleccion(usuariosAdapter: UsuariosAdapter, pos: Int) {

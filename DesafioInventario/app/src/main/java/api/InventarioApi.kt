@@ -21,6 +21,9 @@ interface InventarioApi {
     @PUT("/modUser/{username}")
     fun modUsuario(@Path("username") username: String, @Body info: Usuario): Call<ResponseBody>
 
+    @DELETE("delUsuario/{username}")
+    fun deleteUsuario(@Path("username") username: String): Call<ResponseBody>
+
     @Headers("Content-Type:application/json")
     @POST("/addAula")
     fun addAula(@Body info: Aula): Call<ResponseBody>

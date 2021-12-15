@@ -221,3 +221,15 @@ class Conexion:
                 return cursor.rowcount
         except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return -1
+
+    def borrarUsuario(self, username):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"DELETE FROM {TABLA_USUARIOS} WHERE {USERNAME__USUARIOS} = '{username}'"
+                cursor.execute(consulta)
+                self._conexion.commit()
+                self.cerrarConexion()
+                return cursor.rowcount
+        except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return -1
