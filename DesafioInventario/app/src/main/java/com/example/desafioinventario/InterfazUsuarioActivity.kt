@@ -49,6 +49,7 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_aulas,
+                R.id.nav_usuarios,
                 R.id.nav_perfil
             ), drawerLayout
         )

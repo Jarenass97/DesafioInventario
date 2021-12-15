@@ -36,4 +36,5 @@
     <string name="strMensajeBorrar">Voulez-vous supprimer l\'élément sélectionné ?</string>
     <string name="menu_perfil">Profil</string>
     <string name="strTituloModAula">" Modifier la classe"</string>
+    <string name="menu_usuarios">Gérer les utilisateurs</string>
 </resources>
