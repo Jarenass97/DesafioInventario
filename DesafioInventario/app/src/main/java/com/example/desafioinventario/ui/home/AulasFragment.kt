@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
+import assistant.Auxiliar
+import assistant.Auxiliar.usuario
 import assistant.Curso
 import com.example.desafioinventario.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,7 +31,6 @@ class AulasFragment() : Fragment() {
     lateinit var rvAulas: RecyclerView
     lateinit var aulasAdapter: AulasAdapter
     lateinit var btnAddAula: FloatingActionButton
-    lateinit var usuario: Usuario
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +42,6 @@ class AulasFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bun = requireActivity().intent.extras!!
-        usuario = bun.getSerializable("user") as Usuario
         rvAulas = view.findViewById(R.id.rvAulas)
         rvAulas.setHasFixedSize(true)
         rvAulas.layoutManager = LinearLayoutManager(context)
@@ -76,7 +75,14 @@ class AulasFragment() : Fragment() {
                     for (aula in response.body()!!) {
                         aulas.add(aula)
                     }
-                    newAulasAdapter(AulasAdapter(context as AppCompatActivity, aulas, usuario))
+                    newAulasAdapter(AulasAdapter(context as AppCompatActivity, aulas))
+                } else if (response.code() == 400) {
+                    Toast.makeText(
+                        context,
+                        "No existen aulas que mostrar",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 } else {
                     Toast.makeText(
                         context,

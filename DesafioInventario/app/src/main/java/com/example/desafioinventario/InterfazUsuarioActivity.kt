@@ -20,6 +20,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import assistant.Auxiliar
+import assistant.Auxiliar.usuario
 import com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding
 import model.Usuario
 import retrofit2.*
@@ -29,16 +30,11 @@ class InterfazUsuarioActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityInterfazUsuarioBinding
-    lateinit var usuario: Usuario
     lateinit var rvAulas: RecyclerView
     lateinit var aulasAdapter: AulasAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val bun: Bundle = intent.extras!!
-        usuario = bun.getSerializable("user") as Usuario
-
         binding = ActivityInterfazUsuarioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

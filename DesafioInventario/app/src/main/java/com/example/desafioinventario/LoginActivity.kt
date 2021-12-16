@@ -213,8 +213,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun abrirInterfaz(usuario: Usuario) {
+        Auxiliar.usuario=usuario
         val intent = Intent(this, InterfazUsuarioActivity::class.java)
-        intent.putExtra("user", usuario)
         startActivity(intent)
         finish()
     }

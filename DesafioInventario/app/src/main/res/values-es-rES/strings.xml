@@ -38,4 +38,8 @@
     <string name="strTituloModAula">Modificar Aula</string>
     <string name="menu_usuarios">Administrar usuarios</string>
     <string name="strTituloModUser">Modificar usuario</string>
+    <string name="strEligeOpcion">Elige qué hacer</string>
+    <string name="strMensajeOpcionAula">¿Qué quieres hacer con el aula seleccionada?</string>
+    <string name="strEditar">Editar</string>
+    <string name="strVerInventario">Ver inventario</string>
 </resources>

@@ -39,4 +39,8 @@
     <string name="strTituloModAula">Modify classroom</string>
     <string name="menu_usuarios">Manage users</string>
     <string name="strTituloModUser">Modify user</string>
+    <string name="strEligeOpcion">Choose what to do</string>
+    <string name="strMensajeOpcionAula">What do you want to do with the selected classroom?</string>
+    <string name="strEditar">Edit</string>
+    <string name="strVerInventario">View inventory</string>
 </resources>

@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat
 import api.InventarioApi
 import api.ServiceBuilder
 import assistant.Auxiliar
+import assistant.Auxiliar.usuario
 import com.example.desafioinventario.R
 import com.google.android.material.navigation.NavigationView
 import model.Usuario
@@ -38,7 +39,6 @@ import java.io.InputStream
 class PerfilFragment : Fragment() {
 
     lateinit var btnGuardar: ImageButton
-    lateinit var usuario: Usuario
     lateinit var img: ImageView
     lateinit var edUsername: EditText
     lateinit var email: EditText
@@ -58,8 +58,6 @@ class PerfilFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bun = requireActivity().intent.extras!!
-        usuario = bun.getSerializable("user") as Usuario
         img = view.findViewById<ImageView>(R.id.imgUsuarioPerfil)
         edUsername = view.findViewById<EditText>(R.id.edUsernamePerfil)
         email = view.findViewById<EditText>(R.id.edEmailPerfil)

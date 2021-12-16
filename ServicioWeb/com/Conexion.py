@@ -36,9 +36,8 @@ class Conexion:
                     del cursor
                     cursor = self._conexion.cursor()
                     consulta = f"SELECT {Constantes.ID_ROL__USER_ROLES} FROM {Constantes.TABLA__USER_ROLES} " \
-                               f"WHERE {Constantes.ID_USER__USER_ROLES} in (SELECT {Constantes.USERNAME__USUARIOS} " \
-                               f"FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = %s)"
-                    cursor.execute(consulta, usuario[USERNAME__USUARIOS])
+                               f"WHERE {Constantes.ID_USER__USER_ROLES} = '{usuario[USERNAME__USUARIOS]}'"
+                    cursor.execute(consulta)
                     r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
                          cursor.fetchall()]
                     if r:
@@ -160,6 +159,7 @@ class Conexion:
                 self.cerrarConexion()
                 return r
         except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            self.cerrarConexion()
             return []
 
     def getAulasEncargado(self, encargado):

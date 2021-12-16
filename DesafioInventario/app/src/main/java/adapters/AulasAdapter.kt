@@ -1,6 +1,6 @@
 package adapters
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -12,21 +12,20 @@ import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
+import assistant.Auxiliar.usuario
 import assistant.Curso
+import com.example.desafioinventario.InventarioActivity
 import com.example.desafioinventario.R
-import com.google.android.material.navigation.NavigationView
 import model.Aula
 import model.Usuario
 import okhttp3.ResponseBody
-import org.jetbrains.anko.find
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AulasAdapter(
     var context: AppCompatActivity,
-    var aulas: ArrayList<Aula>,
-    val usuario: Usuario
+    var aulas: ArrayList<Aula>
 ) :
     RecyclerView.Adapter<AulasAdapter.ViewHolder>() {
 
@@ -38,8 +37,7 @@ class AulasAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(
             layoutInflater.inflate(R.layout.aulas_item, parent, false),
-            context,
-            usuario
+            context
         )
     }
 
@@ -63,7 +61,7 @@ class AulasAdapter(
         }
     }
 
-    class ViewHolder(view: View, val ventana: AppCompatActivity, val usuario: Usuario) :
+    class ViewHolder(view: View, val ventana: AppCompatActivity) :
         RecyclerView.ViewHolder(view) {
         val txtNombre = view.findViewById<TextView>(R.id.txtNombreAulaItem)
         val txtCurso = view.findViewById<TextView>(R.id.txtCursoAulaItem)
@@ -86,8 +84,8 @@ class AulasAdapter(
             itemView.setOnClickListener(View.OnClickListener {
                 marcarSeleccion(aulasAdapter, pos)
                 if (usuario.isJefe()) {
-                    dialogAula(aula, aulasAdapter)
-                }
+                    preguntarOpcion(aula, aulasAdapter)
+                }else abrirInventario(aula)
             })
             itemView.setOnLongClickListener(View.OnLongClickListener {
                 marcarSeleccion(aulasAdapter, pos)
@@ -96,6 +94,27 @@ class AulasAdapter(
                 }
                 true
             })
+        }
+
+        private fun preguntarOpcion(aula: Aula, aulasAdapter: AulasAdapter) {
+            AlertDialog.Builder(ventana)
+                .setTitle(ventana.getString(R.string.strEligeOpcion))
+                .setMessage(ventana.getString(R.string.strMensajeOpcionAula))
+                .setPositiveButton(ventana.getString(R.string.strEditar)){view,_->
+                    dialogAula(aula,aulasAdapter)
+                    view.dismiss()
+                }
+                .setNegativeButton(ventana.getString(R.string.strVerInventario)){view,_->
+                    abrirInventario(aula)
+                    view.dismiss()
+                }
+                .setCancelable(true).create().show()
+        }
+
+        private fun abrirInventario(aula: Aula) {
+            val intent= Intent(ventana,InventarioActivity::class.java)
+            intent.putExtra("aula",aula)
+            ventana.startActivity(intent)
         }
 
         private fun deleteAula(aula: Aula, aulasAdapter: AulasAdapter) {
@@ -137,7 +156,7 @@ class AulasAdapter(
                     deleteAula(aula, aulasAdapter)
                     view.dismiss()
                 }
-                .setNegativeButton(ventana.getString(R.string.strCancelar)){view,_->
+                .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
                     view.dismiss()
                 }
                 .create()
@@ -274,7 +293,7 @@ class AulasAdapter(
                     if (response.code() == 200) {
                         var usuarios = ArrayList<String>(0)
                         for (post in response.body()!!) {
-                            if(post.isEncargado()) usuarios.add(post.username)
+                            if (post.isEncargado()) usuarios.add(post.username)
                         }
                         encargado.adapter = ArrayAdapter(
                             ventana,

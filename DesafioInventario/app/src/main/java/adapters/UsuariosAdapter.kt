@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
 import assistant.Auxiliar
+import assistant.Auxiliar.usuario
 import assistant.Rol
 import com.example.desafioinventario.R
 import com.google.android.material.navigation.NavigationView
@@ -26,7 +27,6 @@ import retrofit2.Response
 class UsuariosAdapter(
     var context: AppCompatActivity,
     var usuarios: ArrayList<Usuario>,
-    var usuarioConectado: Usuario
 ) :
     RecyclerView.Adapter<UsuariosAdapter.ViewHolder>() {
 
@@ -37,9 +37,7 @@ class UsuariosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(
-            layoutInflater.inflate(R.layout.usuarios_item, parent, false),
-            context,
-            usuarioConectado
+            layoutInflater.inflate(R.layout.usuarios_item, parent, false), context
         )
     }
 
@@ -63,7 +61,7 @@ class UsuariosAdapter(
         }
     }
 
-    class ViewHolder(view: View, val ventana: AppCompatActivity, val usuarioConectado: Usuario) :
+    class ViewHolder(view: View, val ventana: AppCompatActivity) :
         RecyclerView.ViewHolder(view) {
         val imgUsuario = view.findViewById<ImageView>(R.id.imgUsuarioItem)
         val txtUsername = view.findViewById<TextView>(R.id.txtUsernameItem)
@@ -78,7 +76,7 @@ class UsuariosAdapter(
         ) {
             if (!usuario.sinImagen()) imgUsuario.setImageBitmap(Auxiliar.getImage(usuario.img!!))
             txtUsername.text =
-                if (usuario.username == usuarioConectado.username) "${usuario.username}(tú)"
+                if (usuario.username == Auxiliar.usuario.username) "${usuario.username}(tú)"
                 else usuario.username
             txtRoles.text = rolesToString(usuario)
             if (pos == seleccionado) {
@@ -135,7 +133,11 @@ class UsuariosAdapter(
                         if (ckbProfesor.isChecked) roles.add(Rol.PROFESOR)
                         usuario.roles = roles
                         modUser(username, usuario, usuariosAdapter)
-                    }else Toast.makeText(ventana, ventana.getString(R.string.strCamposVacios), Toast.LENGTH_SHORT).show()
+                    } else Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strCamposVacios),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     view.dismiss()
                 }
                 .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
@@ -272,6 +274,7 @@ class UsuariosAdapter(
                     if (response.code() == 200) {
                         val usuarios = ArrayList<Usuario>(0)
                         for (user in response.body()!!) {
+                            if (user.img == null) user.img = byteArrayOf()
                             usuarios.add(user)
                         }
                         usuariosAdapter.usuarios = usuarios

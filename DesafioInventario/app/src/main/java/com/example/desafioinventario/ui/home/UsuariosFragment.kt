@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
+import assistant.Auxiliar
+import assistant.Auxiliar.usuario
 import assistant.Rol
 import com.example.desafioinventario.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -28,7 +30,6 @@ import retrofit2.Response
 class UsuariosFragment : Fragment() {
     lateinit var rvUsuarios: RecyclerView
     lateinit var usuariosAdapter: UsuariosAdapter
-    lateinit var usuario: Usuario
     lateinit var btnAddUser: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +45,6 @@ class UsuariosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bun = requireActivity().intent.extras!!
-        usuario = bun.getSerializable("user") as Usuario
         rvUsuarios = view.findViewById(R.id.rvUsuarios)
         rvUsuarios.setHasFixedSize(true)
         rvUsuarios.layoutManager = LinearLayoutManager(context)
@@ -166,8 +165,7 @@ class UsuariosFragment : Fragment() {
                     newUsuariosAdapter(
                         UsuariosAdapter(
                             context as AppCompatActivity,
-                            usuarios,
-                            usuario
+                            usuarios
                         )
                     )
                 } else {
