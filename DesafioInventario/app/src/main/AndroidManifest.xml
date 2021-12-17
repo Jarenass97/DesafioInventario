@@ -14,6 +14,15 @@
         android:theme="@style/Theme.DesafioInventario"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".InventarioActivity"
             android:exported="true" />
         <activity
@@ -23,13 +32,7 @@
             android:theme="@style/Theme.DesafioInventario.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.actions"
