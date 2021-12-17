@@ -60,8 +60,8 @@ class DevicesAulaAdapter(
 
     class ViewHolder(view: View, val ventana: AppCompatActivity) :
         RecyclerView.ViewHolder(view) {
-        val txtId = view.findViewById<TextView>(R.id.txtIdDispositivo)
-        val txtNombre = view.findViewById<TextView>(R.id.txtNombreDispositivo)
+        val txtId = view.findViewById<TextView>(R.id.txtParam1Dispositivo)
+        val txtNombre = view.findViewById<TextView>(R.id.txtParam2Dispositivo)
 
         fun bind(
             dispositivo: Dispositivo,

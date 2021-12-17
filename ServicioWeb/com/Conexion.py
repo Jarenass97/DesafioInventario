@@ -110,8 +110,7 @@ class Conexion:
             self.conectar()
             cursor = self._conexion.cursor()
             cursor.execute(
-                f"SELECT * FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = %s",
-                username)
+                f"SELECT * FROM {Constantes.TABLA_USUARIOS} WHERE {Constantes.USERNAME__USUARIOS} = '{username}'")
             r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()]
             if r:
                 usuario = r[0]
@@ -292,7 +291,6 @@ class Conexion:
             consulta = f"UPDATE {TABLA__DISPOSITIVOS} SET {ID__DISPOSITIVOS} = '{new_id}', " \
                        f"{NOMBRE__DISPOSITIVOS} = '{nombre}', {AULA__DISPOSITIVOS} = '{aula}' " \
                        f"WHERE {ID__DISPOSITIVOS} = '{id}'"
-            print(consulta)
             cursor.execute(consulta)
             self._conexion.commit()
             self.cerrarConexion()
@@ -311,3 +309,16 @@ class Conexion:
                 return cursor.rowcount
         except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return -1
+
+    def getEncargados(self):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"SELECT {ID_USER__USER_ROLES} FROM {TABLA__USER_ROLES} WHERE {ID_ROL__USER_ROLES} = {ID_ENCARGADO}"
+                cursor.execute(consulta)
+                r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
+                     cursor.fetchall()]
+                self.cerrarConexion()
+                return r
+        except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return []

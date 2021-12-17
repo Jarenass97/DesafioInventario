@@ -2,6 +2,7 @@ package com.example.desafioinventario.ui.home
 
 import adapters.AulasAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
-import assistant.Auxiliar
 import assistant.Auxiliar.usuario
 import assistant.Curso
 import com.example.desafioinventario.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import model.Aula
+import model.Encargado
 import model.Usuario
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -47,7 +48,7 @@ class AulasFragment() : Fragment() {
         rvAulas.layoutManager = LinearLayoutManager(context)
         btnAddAula = view.findViewById(R.id.btnAddAula)
         btnAddAula.setOnClickListener(View.OnClickListener {
-            dialogAula()
+            compruebaEncargados()
         })
         cargarDatos()
         cargarAulas()
@@ -59,6 +60,46 @@ class AulasFragment() : Fragment() {
         }
     }
 
+    private fun compruebaEncargados() {
+        val request = ServiceBuilder.buildService(InventarioApi::class.java)
+        val call = request.getEncargados()
+        call.enqueue(object : Callback<MutableList<Encargado>> {
+            override fun onResponse(
+                call: Call<MutableList<Encargado>>,
+                response: Response<MutableList<Encargado>>
+            ) {
+                if (response.code() == 200) {
+                    val encargados = ArrayList<String>(0)
+                    for (post in response.body()!!) {
+                        encargados.add(post.nombre)
+                    }
+                    if (encargados.isNotEmpty()) dialogAula(encargados)
+                    else Toast.makeText(
+                        context,
+                        "No existen usuarios encargados que asignar al aula",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                } else {
+                    Toast.makeText(
+                        context,
+                        response.message().toString(),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<Encargado>>, t: Throwable) {
+                Toast.makeText(
+                    context,
+                    getString(R.string.strFalloConexion),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+        })
+    }
 
     private fun cargarAulas() {
         val request = ServiceBuilder.buildService(InventarioApi::class.java)
@@ -108,15 +149,15 @@ class AulasFragment() : Fragment() {
         rvAulas.adapter = aulasAdapter
     }
 
-    private fun dialogAula() {
+    private fun dialogAula(encargados: ArrayList<String>) {
         val aulaView = layoutInflater.inflate(R.layout.aulas_creater, null)
         val nombre = aulaView.findViewById<EditText>(R.id.edNombreAula)
         val descripcion = aulaView.findViewById<EditText>(R.id.edDescripcionAula)
         val curso = aulaView.findViewById<Spinner>(R.id.spCursoAula)
-        val encargado = aulaView.findViewById<Spinner>(R.id.spEncargadoAula)
+        val spEncargados = aulaView.findViewById<Spinner>(R.id.spEncargadoAula)
         val alumnos = aulaView.findViewById<EditText>(R.id.edAlumnosAula)
         cargarCursos(curso)
-        cargarEncargados(encargado)
+        cargarEncargados(spEncargados, encargados)
         AlertDialog.Builder(requireContext())
             .setIcon(R.drawable.ic_class)
             .setTitle(getString(R.string.strTituloAddAula))
@@ -127,7 +168,7 @@ class AulasFragment() : Fragment() {
                         nombre.text.toString(),
                         descripcion.text.toString(),
                         Curso.valueOf(curso.selectedItem.toString()),
-                        encargado.selectedItem.toString(),
+                        spEncargados.selectedItem.toString(),
                         alumnos.text.toString().toInt()
                     )
                     crearAula(aula)
@@ -182,44 +223,13 @@ class AulasFragment() : Fragment() {
         })
     }
 
-    private fun cargarEncargados(encargado: Spinner) {
-        val request = ServiceBuilder.buildService(InventarioApi::class.java)
-        val call = request.getUsuarios()
-        call.enqueue(object : Callback<MutableList<Usuario>> {
-            override fun onResponse(
-                call: Call<MutableList<Usuario>>,
-                response: Response<MutableList<Usuario>>
-            ) {
-                if (response.code() == 200) {
-                    var usuarios = ArrayList<String>(0)
-                    for (post in response.body()!!) {
-                        if (post.isEncargado()) usuarios.add(post.username)
-                    }
-                    encargado.adapter = ArrayAdapter(
-                        context!!,
-                        R.layout.encargados_list,
-                        R.id.txtEncargadoAulaItem,
-                        usuarios
-                    )
-                } else {
-                    Toast.makeText(
-                        context,
-                        response.message().toString(),
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-            }
-
-            override fun onFailure(call: Call<MutableList<Usuario>>, t: Throwable) {
-                Toast.makeText(
-                    context,
-                    getString(R.string.strFalloConexion),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-
-        })
+    private fun cargarEncargados(encargado: Spinner, encargados: ArrayList<String>) {
+        encargado.adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.encargados_list,
+            R.id.txtEncargadoAulaItem,
+            encargados
+        )
     }
 
     private fun cargarCursos(curso: Spinner) {

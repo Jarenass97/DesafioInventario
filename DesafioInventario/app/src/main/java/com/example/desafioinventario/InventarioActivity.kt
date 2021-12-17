@@ -29,6 +29,7 @@ class InventarioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventario)
+        supportActionBar?.hide()
         val bun = intent.extras!!
         aula = bun.getSerializable("aula") as Aula
         rvDispositivos = findViewById(R.id.rvDispositivos)

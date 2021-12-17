@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/txtIdDispositivo"
+        android:id="@+id/txtParam1Dispositivo"
         style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,15 +34,15 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txtNombreDispositivo"
+        android:id="@+id/txtParam2Dispositivo"
         style="@style/texto_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/txtIdDispositivo"
+        app:layout_constraintBottom_toBottomOf="@+id/txtParam1Dispositivo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/txtIdDispositivo"
-        app:layout_constraintTop_toTopOf="@+id/txtIdDispositivo" />
+        app:layout_constraintStart_toEndOf="@+id/txtParam1Dispositivo"
+        app:layout_constraintTop_toTopOf="@+id/txtParam1Dispositivo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,17 +8,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
-import assistant.Auxiliar
 import assistant.Auxiliar.usuario
 import assistant.Curso
 import com.example.desafioinventario.InventarioActivity
 import com.example.desafioinventario.R
 import model.Aula
-import model.Usuario
+import model.Encargado
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -102,7 +100,7 @@ class AulasAdapter(
                 .setTitle(ventana.getString(R.string.strEligeOpcion))
                 .setMessage(ventana.getString(R.string.strMensajeOpcionAula))
                 .setPositiveButton(ventana.getString(R.string.strEditar)) { view, _ ->
-                    dialogAula(aula, aulasAdapter)
+                    compruebaEncargados(aula, aulasAdapter)
                     view.dismiss()
                 }
                 .setNegativeButton(ventana.getString(R.string.strVerInventario)) { view, _ ->
@@ -112,10 +110,50 @@ class AulasAdapter(
                 .setCancelable(true).create().show()
         }
 
+        private fun compruebaEncargados(aula: Aula, aulasAdapter: AulasAdapter) {
+            val request = ServiceBuilder.buildService(InventarioApi::class.java)
+            val call = request.getEncargados()
+            call.enqueue(object : Callback<MutableList<Encargado>> {
+                override fun onResponse(
+                    call: Call<MutableList<Encargado>>,
+                    response: Response<MutableList<Encargado>>
+                ) {
+                    if (response.code() == 200) {
+                        val encargados = ArrayList<String>(0)
+                        for (post in response.body()!!) {
+                            encargados.add(post.nombre)
+                        }
+                        if (encargados.isNotEmpty()) dialogAula(aula, encargados, aulasAdapter)
+                        else Toast.makeText(
+                            ventana,
+                            "No existen usuarios encargados que asignar al aula",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    } else {
+                        Toast.makeText(
+                            ventana,
+                            response.message().toString(),
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MutableList<Encargado>>, t: Throwable) {
+                    Toast.makeText(
+                        ventana,
+                        ventana.getString(R.string.strFalloConexion),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            })
+        }
+
         private fun abrirInventario(aula: Aula) {
             val intent = Intent(ventana, InventarioActivity::class.java)
             intent.putExtra("aula", aula)
-            intent.putExtra("opcion", Auxiliar.GESTION_INVENTARIO_AULA)
             ventana.startActivity(intent)
         }
 
@@ -165,18 +203,22 @@ class AulasAdapter(
                 .show()
         }
 
-        private fun dialogAula(aula: Aula, aulasAdapter: AulasAdapter) {
+        private fun dialogAula(
+            aula: Aula,
+            encargados: ArrayList<String>,
+            aulasAdapter: AulasAdapter
+        ) {
             val identificador = aula.nombre
             val aulaView = ventana.layoutInflater.inflate(R.layout.aulas_creater, null)
             val nombre = aulaView.findViewById<EditText>(R.id.edNombreAula)
             val descripcion = aulaView.findViewById<EditText>(R.id.edDescripcionAula)
             val curso = aulaView.findViewById<Spinner>(R.id.spCursoAula)
-            val encargado = aulaView.findViewById<Spinner>(R.id.spEncargadoAula)
+            val spEncargados = aulaView.findViewById<Spinner>(R.id.spEncargadoAula)
             val alumnos = aulaView.findViewById<EditText>(R.id.edAlumnosAula)
             nombre.append(aula.nombre)
             descripcion.append(aula.descripcion)
             cargarCursos(curso, aula.curso)
-            cargarEncargados(encargado, aula.encargado)
+            cargarEncargados(spEncargados, encargados, aula.encargado)
             alumnos.append(aula.numAlumnos.toString())
             AlertDialog.Builder(ventana)
                 .setIcon(R.drawable.ic_class)
@@ -188,7 +230,7 @@ class AulasAdapter(
                             nombre.text.toString(),
                             descripcion.text.toString(),
                             Curso.valueOf(curso.selectedItem.toString()),
-                            encargado.selectedItem.toString(),
+                            spEncargados.selectedItem.toString(),
                             alumnos.text.toString().toInt()
                         )
                         modAula(identificador, aula, aulasAdapter)
@@ -284,49 +326,22 @@ class AulasAdapter(
             return nombre.text.isEmpty() || descripcion.text.isEmpty() || alumnos.text.isEmpty()
         }
 
-        private fun cargarEncargados(encargado: Spinner, userEncargado: String?) {
-            val request = ServiceBuilder.buildService(InventarioApi::class.java)
-            val call = request.getUsuarios()
-            call.enqueue(object : Callback<MutableList<Usuario>> {
-                override fun onResponse(
-                    call: Call<MutableList<Usuario>>,
-                    response: Response<MutableList<Usuario>>
-                ) {
-                    if (response.code() == 200) {
-                        var usuarios = ArrayList<String>(0)
-                        for (post in response.body()!!) {
-                            if (post.isEncargado()) usuarios.add(post.username)
-                        }
-                        encargado.adapter = ArrayAdapter(
-                            ventana,
-                            R.layout.encargados_list,
-                            R.id.txtEncargadoAulaItem,
-                            usuarios
-                        )
-                        if (userEncargado != null) encargado.setSelection(
-                            usuarios.indexOf(
-                                userEncargado
-                            )
-                        )
-                    } else {
-                        Toast.makeText(
-                            ventana,
-                            response.message().toString(),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    }
-                }
-
-                override fun onFailure(call: Call<MutableList<Usuario>>, t: Throwable) {
-                    Toast.makeText(
-                        ventana,
-                        ventana.getString(R.string.strFalloConexion),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-            })
+        private fun cargarEncargados(
+            encargado: Spinner,
+            encargados: ArrayList<String>,
+            userEncargado: String?
+        ) {
+            encargado.adapter = ArrayAdapter(
+                ventana,
+                R.layout.encargados_list,
+                R.id.txtEncargadoAulaItem,
+                encargados
+            )
+            if (userEncargado != null) encargado.setSelection(
+                encargados.indexOf(
+                    userEncargado
+                )
+            )
         }
 
         private fun cargarCursos(curso: Spinner, cursoAula: Curso) {

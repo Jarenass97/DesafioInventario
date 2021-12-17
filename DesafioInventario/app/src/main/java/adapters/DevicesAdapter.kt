@@ -14,7 +14,6 @@ import assistant.Auxiliar
 import com.example.desafioinventario.R
 import model.Aula
 import model.Dispositivo
-import model.Usuario
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,8 +58,8 @@ class DevicesAdapter(
 
     class ViewHolder(view: View, val ventana: AppCompatActivity) :
         RecyclerView.ViewHolder(view) {
-        val txtId = view.findViewById<TextView>(R.id.txtIdDispositivo)
-        val txtNombre = view.findViewById<TextView>(R.id.txtNombreDispositivo)
+        val txtNombreDisp = view.findViewById<TextView>(R.id.txtParam1Dispositivo)
+        val txtAula = view.findViewById<TextView>(R.id.txtParam2Dispositivo)
 
         fun bind(
             dispositivo: Dispositivo,
@@ -68,16 +67,16 @@ class DevicesAdapter(
             pos: Int,
             devicesAdapter: DevicesAdapter
         ) {
-            txtId.text = dispositivo.id
-            txtNombre.text = dispositivo.nombre
+            txtNombreDisp.text = dispositivo.nombre
+            txtAula.text = "${ventana.getString(R.string.strAula)}: ${dispositivo.aula}"
             if (pos == seleccionado) {
                 with(itemView) { setBackgroundResource(R.color.onPrimaryDark) }
-                with(txtId) { setTextColor(Color.WHITE) }
-                with(txtNombre) { setTextColor(Color.WHITE) }
+                with(txtNombreDisp) { setTextColor(Color.WHITE) }
+                with(txtAula) { setTextColor(Color.WHITE) }
             } else {
                 with(itemView) { setBackgroundResource(R.color.white) }
-                with(txtId) { setTextColor(Color.BLACK) }
-                with(txtNombre) { setTextColor(Color.BLACK) }
+                with(txtNombreDisp) { setTextColor(Color.BLACK) }
+                with(txtAula) { setTextColor(Color.BLACK) }
             }
             if (Auxiliar.usuario.isEncargado() || Auxiliar.usuario.isJefe()) {
                 itemView.setOnClickListener(View.OnClickListener {

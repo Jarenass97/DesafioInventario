@@ -13,6 +13,9 @@ interface InventarioApi {
     @GET("/usuarios")
     fun getUsuarios(): Call<MutableList<Usuario>>
 
+    @GET("/encargados")
+    fun getEncargados(): Call<MutableList<Encargado>>
+
     @Headers("Content-Type:application/json")
     @POST("/addUser")
     fun addUser(@Body info: Usuario): Call<ResponseBody>

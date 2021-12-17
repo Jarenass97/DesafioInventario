@@ -223,5 +223,18 @@ def delDevice(id):
     return resp
 
 
+@app.route('/encargados', methods=['GET'])
+def getEncargados():
+    lista = conexion.getEncargados()
+    if len(lista) != 0:
+        resp = jsonify(lista)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'No existen encargados.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
