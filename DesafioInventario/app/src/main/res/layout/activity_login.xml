@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgUsuarioNavigation"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/user_default"
@@ -36,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imgUsuarioNavigation"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -95,6 +95,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtRegistrar"
             app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/btnMostrarPassword"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/edPasswdLogin"
+            app:layout_constraintEnd_toEndOf="@+id/edPasswdLogin"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/edPasswdLogin"
+            app:layout_constraintTop_toTopOf="@+id/edPasswdLogin"
+            app:srcCompat="@drawable/ic_eye" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -196,7 +208,7 @@
             style="@style/EntradasLogin"
             android:layout_marginTop="40dp"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/strEmail"
             android:inputType="textEmailAddress"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

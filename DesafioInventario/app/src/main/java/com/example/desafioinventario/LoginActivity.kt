@@ -11,6 +11,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -26,6 +27,7 @@ import assistant.Auxiliar
 import assistant.Rol
 import model.Usuario
 import okhttp3.ResponseBody
+import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
@@ -46,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtMensajeReg: TextView
     lateinit var animaciones: Animacion
     lateinit var imgUser: ImageView
+    lateinit var btnMostrarPass: ImageButton
+    var passVisible = false
     var isLogin = true
     var photo: Bitmap? = null
     val contexto = this
@@ -67,6 +71,19 @@ class LoginActivity : AppCompatActivity() {
         edPass1Reg = findViewById(R.id.edPasswdReg)
         edPass2Reg = findViewById(R.id.edPasswd2Reg)
         txtMensajeReg = findViewById(R.id.txtMensajeErrorReg)
+        btnMostrarPass = findViewById(R.id.btnMostrarPassword)
+        btnMostrarPass.setOnClickListener(View.OnClickListener {
+            passVisible = !passVisible
+            if (passVisible) {
+                btnMostrarPass.setImageResource(R.drawable.ic_eye_closed)
+                edPasswdLogin.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                btnMostrarPass.setImageResource(R.drawable.ic_eye)
+                edPasswdLogin.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            edPasswdLogin.setSelection(edPasswdLogin.text.length)
+        })
         ocultarMsgs()
 
         val txtRegistrar = findViewById<TextView>(R.id.txtRegistrar)
@@ -146,7 +163,9 @@ class LoginActivity : AppCompatActivity() {
                                 post.email,
                                 post.img
                             )
+                        if (usuario.img == null) usuario.img = byteArrayOf()
                         if (usuario.passwd == edPasswdLogin.text.toString()) {
+                            contexto.abrirInterfaz(usuario)
                             Toast.makeText(
                                 contexto,
                                 getString(R.string.strLoginCorrecto),
@@ -178,6 +197,13 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun abrirInterfaz(usuario: Usuario) {
+        Auxiliar.usuario = usuario
+        val intent = Intent(this, InterfazUsuarioActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun camposLoginVacios(): Boolean {
@@ -234,7 +260,7 @@ class LoginActivity : AppCompatActivity() {
                             getString(R.string.strOperacionExitosa),
                             Toast.LENGTH_SHORT
                         ).show()
-                    } else Toast.makeText(contexto, "el usuario ya existe", Toast.LENGTH_SHORT)
+                    } else Toast.makeText(contexto, response.message(), Toast.LENGTH_SHORT)
                         .show()
                 }
 

@@ -20,4 +20,19 @@ data class Usuario(
     @SerializedName("image")
     var img: ByteArray? = byteArrayOf()
 ) : Serializable {
+    fun isJefe(): Boolean {
+        return roles.contains(Rol.JEFE_DEPARTAMENTO)
+    }
+
+    fun sinImagen(): Boolean {
+        return img.contentEquals(byteArrayOf())
+    }
+
+    fun isEncargado(): Boolean {
+        return roles.contains(Rol.ENCARGADO)
+    }
+
+    fun isProfesor(): Boolean {
+        return roles.contains(Rol.PROFESOR)
+    }
 }
