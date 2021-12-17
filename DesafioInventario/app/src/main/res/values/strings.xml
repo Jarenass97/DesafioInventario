@@ -45,4 +45,5 @@
     <string name="strVerInventario">View inventory</string>
     <string name="strIdentificador">Identifier</string>
     <string name="strCrearDispositivo">Create device</string>
+    <string name="strModificarDispositivo">Modify device</string>
 </resources>

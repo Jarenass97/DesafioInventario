@@ -271,3 +271,43 @@ class Conexion:
                 return r
         except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return []
+
+    def getDevicesByAula(self, aula):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"SELECT * FROM {TABLA__DISPOSITIVOS} WHERE {AULA__DISPOSITIVOS} = '{aula}'"
+                cursor.execute(consulta)
+                r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
+                     cursor.fetchall()]
+                self.cerrarConexion()
+                return r
+        except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return []
+
+    def modificarDispositivo(self, id, new_id, nombre, aula):
+        try:
+            self.conectar()
+            cursor = self._conexion.cursor()
+            consulta = f"UPDATE {TABLA__DISPOSITIVOS} SET {ID__DISPOSITIVOS} = '{new_id}', " \
+                       f"{NOMBRE__DISPOSITIVOS} = '{nombre}', {AULA__DISPOSITIVOS} = '{aula}' " \
+                       f"WHERE {ID__DISPOSITIVOS} = '{id}'"
+            print(consulta)
+            cursor.execute(consulta)
+            self._conexion.commit()
+            self.cerrarConexion()
+            return cursor.rowcount
+        except (pymysql.err.IntegrityError) as e:
+            return -1
+
+    def borrarDispositivo(self, id):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"DELETE FROM {TABLA__DISPOSITIVOS} WHERE {ID__DISPOSITIVOS} = '{id}'"
+                cursor.execute(consulta)
+                self._conexion.commit()
+                self.cerrarConexion()
+                return cursor.rowcount
+        except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return -1

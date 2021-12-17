@@ -183,5 +183,45 @@ def getDevices():
     return resp
 
 
+@app.route('/devices/<aula>', methods=['GET'])
+def getDevicesByAula(aula):
+    lista = conexion.getDevicesByAula(aula)
+    if len(lista) != 0:
+        resp = jsonify(lista)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'No existen dispositivos para este aula.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
+@app.route("/modDevice/<id>", methods=["PUT"])
+def modDevice(id):
+    data = request.json
+    if conexion.modificarDispositivo(id, data[ID__DISPOSITIVOS], data[NOMBRE__DISPOSITIVOS], data[AULA__DISPOSITIVOS]) > 0:
+        respuesta = {'message': 'Ok.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'Error al modificar.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
+@app.route("/delDevice/<id>", methods=["DELETE"])
+def delDevice(id):
+    if conexion.borrarDispositivo(id) > 0:
+        respuesta = {'message': 'Ok.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'Dispositivo' + str(id) + ' no encontrado.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

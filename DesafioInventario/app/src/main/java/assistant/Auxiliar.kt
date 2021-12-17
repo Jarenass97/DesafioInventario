@@ -8,6 +8,8 @@ import java.io.ByteArrayOutputStream
 object Auxiliar {
     val CODE_GALLERY = 1
     val CODE_CAMERA = 1888
+    val GESTION_INVENTARIO_AULA = "aula"
+    val GESTION_INVENTARIO_GENERAL = "general"
 
     lateinit var usuario: Usuario
 

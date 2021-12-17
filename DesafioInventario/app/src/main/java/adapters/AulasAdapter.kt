@@ -12,6 +12,7 @@ import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
+import assistant.Auxiliar
 import assistant.Auxiliar.usuario
 import assistant.Curso
 import com.example.desafioinventario.InventarioActivity
@@ -114,6 +115,7 @@ class AulasAdapter(
         private fun abrirInventario(aula: Aula) {
             val intent = Intent(ventana, InventarioActivity::class.java)
             intent.putExtra("aula", aula)
+            intent.putExtra("opcion", Auxiliar.GESTION_INVENTARIO_AULA)
             ventana.startActivity(intent)
         }
 

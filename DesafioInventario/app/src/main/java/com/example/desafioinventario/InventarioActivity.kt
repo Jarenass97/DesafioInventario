@@ -1,13 +1,15 @@
 package com.example.desafioinventario
 
-import adapters.DevicesAdapter
-import androidx.appcompat.app.AppCompatActivity
+import adapters.DevicesAulaAdapter
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
@@ -22,7 +24,7 @@ import retrofit2.Response
 class InventarioActivity : AppCompatActivity() {
     lateinit var rvDispositivos: RecyclerView
     lateinit var aula: Aula
-    lateinit var devicesAdapter: DevicesAdapter
+    lateinit var devicesAdapter: DevicesAulaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,10 @@ class InventarioActivity : AppCompatActivity() {
         val dialog = layoutInflater.inflate(R.layout.dispositivos_creater, null)
         val edIdentificador = dialog.findViewById<EditText>(R.id.edIdentificadorDispositivoCreater)
         val edNombre = dialog.findViewById<EditText>(R.id.edNombreDispositivoCreater)
+        val txtAula = dialog.findViewById<TextView>(R.id.txtAulaDispositivosCreater)
+        val spAulas = dialog.findViewById<Spinner>(R.id.spAulaDispositivosCreater)
+        txtAula.isVisible = false
+        spAulas.isVisible = false
         AlertDialog.Builder(this)
             .setView(dialog)
             .setTitle(getString(R.string.strCrearDispositivo))
@@ -48,7 +54,7 @@ class InventarioActivity : AppCompatActivity() {
                         Dispositivo(
                             edIdentificador.text.toString(),
                             edNombre.text.toString(),
-                            aula.nombre
+                            aula!!.nombre
                         )
                     )
                 }
@@ -95,7 +101,7 @@ class InventarioActivity : AppCompatActivity() {
 
     private fun cargarDispositivos() {
         val request = ServiceBuilder.buildService(InventarioApi::class.java)
-        val call = request.getDispositivos()
+        val call = request.getDispositivosByAula(aula.nombre)
         call.enqueue(object : Callback<MutableList<Dispositivo>> {
             override fun onResponse(
                 call: Call<MutableList<Dispositivo>>,
@@ -106,11 +112,17 @@ class InventarioActivity : AppCompatActivity() {
                     for (device in response.body()!!) {
                         dispositivos.add(device)
                     }
-                    newDevicesAdapter(DevicesAdapter(this@InventarioActivity, dispositivos))
+                    newDevicesAdapter(
+                        DevicesAulaAdapter(
+                            this@InventarioActivity,
+                            dispositivos,
+                            aula
+                        )
+                    )
                 } else {
                     Toast.makeText(
                         this@InventarioActivity,
-                        response.message(),
+                        "No existen dispositivos que mostrar",
                         Toast.LENGTH_LONG
                     )
                         .show()
@@ -128,7 +140,7 @@ class InventarioActivity : AppCompatActivity() {
         })
     }
 
-    private fun newDevicesAdapter(adaptador: DevicesAdapter) {
+    private fun newDevicesAdapter(adaptador: DevicesAulaAdapter) {
         devicesAdapter = adaptador
         rvDispositivos.adapter = devicesAdapter
     }

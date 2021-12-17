@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34d7d31a-d8a0-4f78-84cb-1c1c77cc7c6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/DevicesAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/model/Dispositivo.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/aulas_spinner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/dispositivos_creater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/dispositivos_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/AulasAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/AulasAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/DevicesAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/adapters/DevicesAulaAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/api/InventarioApi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/assistant/Auxiliar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/assistant/Auxiliar.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InventarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/InventarioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/java/com/example/desafioinventario/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/activity_inventario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/activity_inventario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/usuarios_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/usuarios_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/dispositivos_creater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/layout/dispositivos_creater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-es-rES/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-es-rES/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-fr-rFR/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values-fr-rFR/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DesafioInventario/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant/Constantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant/Constantes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com/Conexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/Conexion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/com/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/com/main.py" afterDir="false" />
     </list>

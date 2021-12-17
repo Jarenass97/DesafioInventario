@@ -44,4 +44,5 @@
     <string name="strVerInventario">" voir l'inventaire"</string>
     <string name="strIdentificador">" identifiant"</string>
     <string name="strCrearDispositivo">Créer un appareil</string>
+    <string name="strModificarDispositivo">" Modifier l'appareil"</string>
 </resources>

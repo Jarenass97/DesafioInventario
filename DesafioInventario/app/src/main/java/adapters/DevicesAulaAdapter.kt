@@ -7,23 +7,25 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import api.InventarioApi
 import api.ServiceBuilder
-import assistant.Rol
+import assistant.Auxiliar.usuario
 import com.example.desafioinventario.R
+import model.Aula
 import model.Dispositivo
-import model.Usuario
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DevicesAdapter(
+class DevicesAulaAdapter(
     var context: AppCompatActivity,
     var dispositivos: ArrayList<Dispositivo>,
+    val aula: Aula
 ) :
-    RecyclerView.Adapter<DevicesAdapter.ViewHolder>() {
+    RecyclerView.Adapter<DevicesAulaAdapter.ViewHolder>() {
 
     companion object {
         var seleccionado: Int = -1
@@ -65,7 +67,7 @@ class DevicesAdapter(
             dispositivo: Dispositivo,
             context: AppCompatActivity,
             pos: Int,
-            devicesAdapter: DevicesAdapter
+            devicesAdapter: DevicesAulaAdapter
         ) {
             txtId.text = dispositivo.id
             txtNombre.text = dispositivo.nombre
@@ -78,53 +80,36 @@ class DevicesAdapter(
                 with(txtId) { setTextColor(Color.BLACK) }
                 with(txtNombre) { setTextColor(Color.BLACK) }
             }
-            itemView.setOnClickListener(View.OnClickListener {
-                marcarSeleccion(devicesAdapter, pos)
-            })
-            itemView.setOnLongClickListener(View.OnLongClickListener {
-                marcarSeleccion(devicesAdapter, pos)
-                preguntarBorrado(dispositivo, devicesAdapter)
-                true
-            })
+            if (usuario.isEncargado() || usuario.isJefe()) {
+                itemView.setOnClickListener(View.OnClickListener {
+                    marcarSeleccion(devicesAdapter, pos)
+                    dialogDevice(dispositivo, devicesAdapter)
+                })
+                itemView.setOnLongClickListener(View.OnLongClickListener {
+                    marcarSeleccion(devicesAdapter, pos)
+                    preguntarBorrado(dispositivo, devicesAdapter)
+                    true
+                })
+            }
         }
 
-        private fun dialogUser(usuario: Usuario, usuariosAdapter: UsuariosAdapter) {
-            val username = usuario.username
-            val dialog = ventana.layoutInflater.inflate(R.layout.usuarios_modifier, null)
-            val edUsername = dialog.findViewById<EditText>(R.id.edUsernameModifier)
-            val edPass = dialog.findViewById<EditText>(R.id.edPassModifier)
-            val edEmail = dialog.findViewById<EditText>(R.id.edEmailModifier)
-            val ckbJefe = dialog.findViewById<CheckBox>(R.id.ckbJefeModifier)
-            val ckbEncargado = dialog.findViewById<CheckBox>(R.id.ckbEncargadoModifier)
-            val ckbProfesor = dialog.findViewById<CheckBox>(R.id.ckbProfesorModifier)
-            cargarDatos(usuario, edUsername, edPass, edEmail, ckbJefe, ckbEncargado, ckbProfesor)
+        private fun dialogDevice(dispositivo: Dispositivo, devicesAdapter: DevicesAulaAdapter) {
+            val id = dispositivo.id
+            val dialog = ventana.layoutInflater.inflate(R.layout.dispositivos_creater, null)
+            val edIdentificador =
+                dialog.findViewById<EditText>(R.id.edIdentificadorDispositivoCreater)
+            val edNombre = dialog.findViewById<EditText>(R.id.edNombreDispositivoCreater)
+            ocultarCampos(dialog)
+            cargarDatos(dispositivo, edIdentificador, edNombre)
             AlertDialog.Builder(ventana)
-                .setTitle(ventana.getString(R.string.strTituloModUser))
                 .setView(dialog)
+                .setTitle(ventana.getString(R.string.strModificarDispositivo))
                 .setPositiveButton("OK") { view, _ ->
-                    if (!camposVacios(
-                            edUsername,
-                            edPass,
-                            edEmail,
-                            ckbJefe,
-                            ckbEncargado,
-                            ckbProfesor
-                        )
-                    ) {
-                        usuario.username = edUsername.text.toString()
-                        usuario.passwd = edPass.text.toString()
-                        usuario.email = edEmail.text.toString()
-                        val roles = ArrayList<Rol>(0)
-                        if (ckbJefe.isChecked) roles.add(Rol.JEFE_DEPARTAMENTO)
-                        if (ckbEncargado.isChecked) roles.add(Rol.ENCARGADO)
-                        if (ckbProfesor.isChecked) roles.add(Rol.PROFESOR)
-                        usuario.roles = roles
-                        modUser(username, usuario, usuariosAdapter)
-                    } else Toast.makeText(
-                        ventana,
-                        ventana.getString(R.string.strCamposVacios),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (!camposVacios(edIdentificador, edNombre)) {
+                        dispositivo.id = edIdentificador.text.toString()
+                        dispositivo.nombre = edNombre.text.toString()
+                        modDevice(id, dispositivo, devicesAdapter)
+                    }
                     view.dismiss()
                 }
                 .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
@@ -133,40 +118,33 @@ class DevicesAdapter(
                 .setCancelable(false).create().show()
         }
 
+        private fun ocultarCampos(dialog: View) {
+            val txtAula = dialog.findViewById<TextView>(R.id.txtAulaDispositivosCreater)
+            val spAulas = dialog.findViewById<Spinner>(R.id.spAulaDispositivosCreater)
+            txtAula.isVisible = false
+            spAulas.isVisible = false
+        }
+
         private fun cargarDatos(
-            usuario: Usuario,
-            edUsername: EditText,
-            edPass: EditText,
-            edEmail: EditText,
-            ckbJefe: CheckBox,
-            ckbEncargado: CheckBox,
-            ckbProfesor: CheckBox
+            dispositivo: Dispositivo,
+            edIdentificador: EditText,
+            edNombre: EditText
         ) {
-            edUsername.text.apply { clear();append(usuario.username) }
-            edPass.text.apply { clear();append(usuario.passwd) }
-            edEmail.text.apply { clear();append(usuario.email) }
-            if (usuario.isJefe()) ckbJefe.isChecked = true
-            if (usuario.isEncargado()) ckbEncargado.isChecked = true
-            if (usuario.isProfesor()) ckbProfesor.isChecked = true
+            edIdentificador.text.apply { clear();append(dispositivo.id) }
+            edNombre.text.apply { clear();append(dispositivo.nombre) }
         }
 
-        private fun camposVacios(
-            edUsername: EditText,
-            edPass: EditText,
-            edEmail: EditText,
-            ckbJefe: CheckBox,
-            ckbEncargado: CheckBox,
-            ckbProfesor: CheckBox
-        ): Boolean {
-            return edUsername.text.isEmpty() ||
-                    edPass.text.isEmpty() ||
-                    edEmail.text.isEmpty() ||
-                    (!ckbJefe.isChecked && !ckbEncargado.isChecked && !ckbProfesor.isChecked)
+        private fun camposVacios(edIdentificador: EditText, edNombre: EditText): Boolean {
+            return edIdentificador.text.isEmpty() || edNombre.text.isEmpty()
         }
 
-        private fun modUser(username: String, usuario: Usuario, usuariosAdapter: UsuariosAdapter) {
+        private fun modDevice(
+            identificador: String,
+            device: Dispositivo,
+            devicesAdapter: DevicesAulaAdapter
+        ) {
             val request = ServiceBuilder.buildService(InventarioApi::class.java)
-            val call = request.modUsuario(username, usuario)
+            val call = request.modDispositivo(identificador, device)
             call.enqueue(object : Callback<ResponseBody> {
 
                 override fun onResponse(
@@ -180,7 +158,7 @@ class DevicesAdapter(
                             Toast.LENGTH_SHORT
                         )
                             .show()
-                        recargarUsuarios(usuariosAdapter)
+                        recargarDispositivos(devicesAdapter)
                     }
                 }
 
@@ -195,21 +173,14 @@ class DevicesAdapter(
             })
         }
 
-        private fun rolesToString(usuario: Usuario): String {
-            var cad = ""
-            for (r in usuario.roles) {
-                cad += "- $r\n"
-            }
-            cad = cad.removeRange(cad.length - 1 until cad.length)
-            return cad
-        }
 
-        private fun preguntarBorrado(dispositivo: Dispositivo, devicesAdapter: DevicesAdapter) {
+        private fun preguntarBorrado(dispositivo: Dispositivo, devicesAdapter: DevicesAulaAdapter) {
             AlertDialog.Builder(ventana)
                 .setTitle(ventana.getString(R.string.strTituloBorrar))
                 .setMessage(ventana.getString(R.string.strMensajeBorrar))
                 .setPositiveButton("OK") { view, _ ->
                     marcarSeleccion(devicesAdapter, -1)
+                    borrarDispositivo(dispositivo, devicesAdapter)
                     view.dismiss()
                 }
                 .setNegativeButton(ventana.getString(R.string.strCancelar)) { view, _ ->
@@ -219,9 +190,12 @@ class DevicesAdapter(
                 .show()
         }
 
-        private fun borrarUsuario(usuario: Usuario, usuariosAdapter: UsuariosAdapter) {
+        private fun borrarDispositivo(
+            dispositivo: Dispositivo,
+            devicesAdapter: DevicesAulaAdapter
+        ) {
             val request = ServiceBuilder.buildService(InventarioApi::class.java)
-            val call = request.deleteUsuario(usuario.username)
+            val call = request.deleteDispositivo(dispositivo.id)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -234,7 +208,7 @@ class DevicesAdapter(
                             Toast.LENGTH_SHORT
                         )
                             .show()
-                        recargarUsuarios(usuariosAdapter)
+                        recargarDispositivos(devicesAdapter)
                     }
                 }
 
@@ -249,43 +223,45 @@ class DevicesAdapter(
             })
         }
 
-        private fun recargarUsuarios(usuariosAdapter: UsuariosAdapter) {
+        private fun recargarDispositivos(devicesAdapter: DevicesAulaAdapter) {
             val request = ServiceBuilder.buildService(InventarioApi::class.java)
-            val call = request.getUsuarios()
-            call.enqueue(object : Callback<MutableList<Usuario>> {
+            val call = request.getDispositivosByAula(devicesAdapter.aula.nombre)
+            call.enqueue(object : Callback<MutableList<Dispositivo>> {
                 override fun onResponse(
-                    call: Call<MutableList<Usuario>>,
-                    response: Response<MutableList<Usuario>>
+                    call: Call<MutableList<Dispositivo>>,
+                    response: Response<MutableList<Dispositivo>>
                 ) {
                     if (response.code() == 200) {
-                        val usuarios = ArrayList<Usuario>(0)
-                        for (user in response.body()!!) {
-                            if (user.img == null) user.img = byteArrayOf()
-                            usuarios.add(user)
+                        var dispositivos = ArrayList<Dispositivo>(0)
+                        for (device in response.body()!!) {
+                            dispositivos.add(device)
                         }
-                        usuariosAdapter.usuarios = usuarios
-                        usuariosAdapter.notifyDataSetChanged()
+                        devicesAdapter.dispositivos = dispositivos
+                        devicesAdapter.notifyDataSetChanged()
                     } else {
                         Toast.makeText(
                             ventana,
-                            response.message().toString(),
+                            "No existen dispositivos que mostrar",
                             Toast.LENGTH_LONG
                         )
                             .show()
+                        devicesAdapter.dispositivos = ArrayList<Dispositivo>(0)
+                        devicesAdapter.notifyDataSetChanged()
                     }
                 }
 
-                override fun onFailure(call: Call<MutableList<Usuario>>, t: Throwable) {
+                override fun onFailure(call: Call<MutableList<Dispositivo>>, t: Throwable) {
                     Toast.makeText(
                         ventana,
                         ventana.getString(R.string.strFalloConexion),
                         Toast.LENGTH_LONG
                     ).show()
                 }
+
             })
         }
 
-        private fun marcarSeleccion(devicesAdapter: DevicesAdapter, pos: Int) {
+        private fun marcarSeleccion(devicesAdapter: DevicesAulaAdapter, pos: Int) {
             seleccionado = pos
             devicesAdapter.notifyDataSetChanged()
         }

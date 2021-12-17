@@ -47,4 +47,14 @@ interface InventarioApi {
 
     @GET("/devices")
     fun getDispositivos(): Call<MutableList<Dispositivo>>
+
+    @GET("/devices/{aula}")
+    fun getDispositivosByAula(@Path("aula") aula: String): Call<MutableList<Dispositivo>>
+
+    @Headers("Content-Type:application/json")
+    @PUT("/modDevice/{id}")
+    fun modDispositivo(@Path("id") id: String, @Body info: Dispositivo): Call<ResponseBody>
+
+    @DELETE("delDevice/{id}")
+    fun deleteDispositivo(@Path("id") identificador: String): Call<ResponseBody>
 }
