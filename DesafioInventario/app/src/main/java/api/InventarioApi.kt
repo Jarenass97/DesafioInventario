@@ -40,4 +40,11 @@ interface InventarioApi {
 
     @DELETE("delAula/{nombre}")
     fun deleteAula(@Path("nombre") nombre: String): Call<ResponseBody>
+
+    @Headers("Content-Type:application/json")
+    @POST("/addDevice")
+    fun addDevice(@Body info: Dispositivo): Call<ResponseBody>
+
+    @GET("/devices")
+    fun getDispositivos(): Call<MutableList<Dispositivo>>
 }

@@ -213,7 +213,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun abrirInterfaz(usuario: Usuario) {
-        Auxiliar.usuario=usuario
+        Auxiliar.usuario = usuario
         val intent = Intent(this, InterfazUsuarioActivity::class.java)
         startActivity(intent)
         finish()
@@ -273,7 +273,7 @@ class LoginActivity : AppCompatActivity() {
                             getString(R.string.strOperacionExitosa),
                             Toast.LENGTH_SHORT
                         ).show()
-                    } else Toast.makeText(contexto, "el usuario ya existe", Toast.LENGTH_SHORT)
+                    } else Toast.makeText(contexto, response.message(), Toast.LENGTH_SHORT)
                         .show()
                 }
 

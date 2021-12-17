@@ -43,4 +43,6 @@
     <string name="strMensajeOpcionAula">What do you want to do with the selected classroom?</string>
     <string name="strEditar">Edit</string>
     <string name="strVerInventario">View inventory</string>
+    <string name="strIdentificador">Identifier</string>
+    <string name="strCrearDispositivo">Create device</string>
 </resources>

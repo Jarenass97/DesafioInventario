@@ -85,7 +85,7 @@ class AulasAdapter(
                 marcarSeleccion(aulasAdapter, pos)
                 if (usuario.isJefe()) {
                     preguntarOpcion(aula, aulasAdapter)
-                }else abrirInventario(aula)
+                } else abrirInventario(aula)
             })
             itemView.setOnLongClickListener(View.OnLongClickListener {
                 marcarSeleccion(aulasAdapter, pos)
@@ -100,11 +100,11 @@ class AulasAdapter(
             AlertDialog.Builder(ventana)
                 .setTitle(ventana.getString(R.string.strEligeOpcion))
                 .setMessage(ventana.getString(R.string.strMensajeOpcionAula))
-                .setPositiveButton(ventana.getString(R.string.strEditar)){view,_->
-                    dialogAula(aula,aulasAdapter)
+                .setPositiveButton(ventana.getString(R.string.strEditar)) { view, _ ->
+                    dialogAula(aula, aulasAdapter)
                     view.dismiss()
                 }
-                .setNegativeButton(ventana.getString(R.string.strVerInventario)){view,_->
+                .setNegativeButton(ventana.getString(R.string.strVerInventario)) { view, _ ->
                     abrirInventario(aula)
                     view.dismiss()
                 }
@@ -112,8 +112,8 @@ class AulasAdapter(
         }
 
         private fun abrirInventario(aula: Aula) {
-            val intent= Intent(ventana,InventarioActivity::class.java)
-            intent.putExtra("aula",aula)
+            val intent = Intent(ventana, InventarioActivity::class.java)
+            intent.putExtra("aula", aula)
             ventana.startActivity(intent)
         }
 

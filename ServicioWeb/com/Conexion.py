@@ -245,3 +245,29 @@ class Conexion:
                 return cursor.rowcount
         except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
             return -1
+
+    def insertarDispositivo(self, id, nombre, aula):
+        try:
+            self.conectar()
+            cursor = self._conexion.cursor()
+            consulta = f"INSERT INTO {TABLA__DISPOSITIVOS}({ID__DISPOSITIVOS},{NOMBRE__DISPOSITIVOS}," \
+                       f"{AULA__DISPOSITIVOS}) values ('{id}','{nombre}','{aula}')"
+            cursor.execute(consulta)
+            self._conexion.commit()
+            self.cerrarConexion()
+            return 0
+        except pymysql.err.IntegrityError as e:
+            return -1
+
+    def getDevices(self):
+        try:
+            self.conectar()
+            with self._conexion.cursor() as cursor:
+                consulta = f"SELECT * FROM {TABLA__DISPOSITIVOS}"
+                cursor.execute(consulta)
+                r = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in
+                     cursor.fetchall()]
+                self.cerrarConexion()
+                return r
+        except(pymysql.err.OperationalError, pymysql.err.InternalError) as e:
+            return []

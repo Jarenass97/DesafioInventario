@@ -42,4 +42,6 @@
     <string name="strMensajeOpcionAula">Que voulez-vous faire avec la classe sélectionnée ?</string>
     <string name="strEditar">" Éditer"</string>
     <string name="strVerInventario">" voir l'inventaire"</string>
+    <string name="strIdentificador">" identifiant"</string>
+    <string name="strCrearDispositivo">Créer un appareil</string>
 </resources>

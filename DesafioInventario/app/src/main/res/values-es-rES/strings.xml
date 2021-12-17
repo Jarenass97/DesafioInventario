@@ -42,4 +42,6 @@
     <string name="strMensajeOpcionAula">¿Qué quieres hacer con el aula seleccionada?</string>
     <string name="strEditar">Editar</string>
     <string name="strVerInventario">Ver inventario</string>
+    <string name="strIdentificador">Identificador</string>
+    <string name="strCrearDispositivo">Crear dispositivo</string>
 </resources>

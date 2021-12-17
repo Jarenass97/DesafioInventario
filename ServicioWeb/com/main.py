@@ -155,5 +155,33 @@ def delAula(nombre):
     return resp
 
 
+@app.route('/addDevice', methods=["POST"])
+def addDevice():
+    data = request.json
+    if (conexion.insertarDispositivo(data[ID__DISPOSITIVOS], data[NOMBRE__DISPOSITIVOS],
+                                 data[AULA__DISPOSITIVOS]) == 0):
+        respuesta = {'message': 'OK.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'El usuario ya existe.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
+@app.route('/devices', methods=['GET'])
+def getDevices():
+    lista = conexion.getDevices()
+    if len(lista) != 0:
+        resp = jsonify(lista)
+        resp.status_code = 200
+    else:
+        respuesta = {'message': 'No existen dispositivos.'}
+        resp = jsonify(respuesta)
+        resp.status_code = 400
+    return resp
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
