@@ -1,0 +1,108 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.desafioinventario"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:5:22-64
+12
+13    <application
+13-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:7:5-40:19
+14        android:allowBackup="true"
+14-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:8:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.7.0] C:\Users\jorge\.gradle\caches\transforms-3\96e7fe7072f6f2f0e94759043d2c830a\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_launcher"
+17-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:9:9-43
+18        android:label="@string/app_name"
+18-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:10:9-41
+19        android:networkSecurityConfig="@xml/network_security_config"
+19-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:11:9-69
+20        android:roundIcon="@mipmap/ic_launcher_round"
+20-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:12:9-54
+21        android:supportsRtl="true"
+21-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:13:9-35
+22        android:theme="@style/Theme.DesafioInventario"
+22-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:14:9-55
+23        android:usesCleartextTraffic="true" >
+23-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:15:9-44
+24        <activity
+24-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:16:9-24:20
+25            android:name="com.example.desafioinventario.SplashScreen"
+25-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:17:13-41
+26            android:exported="true" >
+26-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:18:13-36
+27            <intent-filter>
+27-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:19:13-23:29
+28                <action android:name="android.intent.action.MAIN" />
+28-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:20:17-69
+28-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:20:25-66
+29
+30                <category android:name="android.intent.category.LAUNCHER" />
+30-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:22:17-77
+30-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:22:27-74
+31            </intent-filter>
+32        </activity>
+33        <activity
+33-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:25:9-27:39
+34            android:name="com.example.desafioinventario.InventarioActivity"
+34-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:26:13-47
+35            android:exported="true" />
+35-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:27:13-36
+36        <activity
+36-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:28:9-32:74
+37            android:name="com.example.desafioinventario.InterfazUsuarioActivity"
+37-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:29:13-52
+38            android:exported="true"
+38-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:30:13-36
+39            android:label="@string/title_activity_interfaz_usuario"
+39-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:31:13-68
+40            android:theme="@style/Theme.DesafioInventario.NoActionBar" />
+40-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:32:13-71
+41        <activity
+41-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:33:9-35:39
+42            android:name="com.example.desafioinventario.LoginActivity"
+42-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:34:13-42
+43            android:exported="true" />
+43-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:35:13-36
+44
+45        <meta-data
+45-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:37:9-39:63
+46            android:name="com.google.android.actions"
+46-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:38:13-54
+47            android:resource="@xml/network_security_config" />
+47-->C:\Users\jorge\Desktop\Jorge Arenas\DAM2\PMDM\Android\Ejercicios\DesafioInventario\DesafioInventario\app\src\main\AndroidManifest.xml:39:13-60
+48
+49        <provider
+49-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+50            android:name="androidx.startup.InitializationProvider"
+50-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+51            android:authorities="com.example.desafioinventario.androidx-startup"
+51-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+52            android:exported="false" >
+52-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+53            <meta-data
+53-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+54                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+54-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+55                android:value="androidx.startup" />
+55-->[androidx.emoji2:emoji2:1.0.0] C:\Users\jorge\.gradle\caches\transforms-3\b1a020b783608d6a2dcf76878629456f\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+56            <meta-data
+56-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\jorge\.gradle\caches\transforms-3\3497c908aec04cfb6aad3271fe84c269\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+57                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+57-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\jorge\.gradle\caches\transforms-3\3497c908aec04cfb6aad3271fe84c269\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+58                android:value="androidx.startup" />
+58-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\jorge\.gradle\caches\transforms-3\3497c908aec04cfb6aad3271fe84c269\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+59        </provider>
+60    </application>
+61
+62</manifest>

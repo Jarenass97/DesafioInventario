@@ -1,0 +1,44 @@
+com/example/desafioinventario/databinding/FragmentPerfilBinding.java
+ com.example.desafioinventario.databinding.FragmentPerfilBinding
+com/example/desafioinventario/databinding/NavHeaderInterfazUsuarioBinding.java
+ com.example.desafioinventario.databinding.NavHeaderInterfazUsuarioBinding
+com/example/desafioinventario/databinding/CursosListBinding.java
+ com.example.desafioinventario.databinding.CursosListBinding
+com/example/desafioinventario/databinding/AppBarInterfazUsuarioBinding.java
+ com.example.desafioinventario.databinding.AppBarInterfazUsuarioBinding
+com/example/desafioinventario/databinding/ContentInterfazUsuarioBinding.java
+ com.example.desafioinventario.databinding.ContentInterfazUsuarioBinding
+com/example/desafioinventario/databinding/DispositivosCreaterBinding.java
+ com.example.desafioinventario.databinding.DispositivosCreaterBinding
+com/example/desafioinventario/databinding/UsuariosModifierBinding.java
+ com.example.desafioinventario.databinding.UsuariosModifierBinding
+com/example/desafioinventario/databinding/FragmentUsuariosBinding.java
+ com.example.desafioinventario.databinding.FragmentUsuariosBinding
+com/example/desafioinventario/databinding/UsuariosItemBinding.java
+ com.example.desafioinventario.databinding.UsuariosItemBinding
+com/example/desafioinventario/databinding/EncargadosListBinding.java
+ com.example.desafioinventario.databinding.EncargadosListBinding
+com/example/desafioinventario/databinding/ActivityLoginBinding.java
+ com.example.desafioinventario.databinding.ActivityLoginBinding
+com/example/desafioinventario/databinding/AulasSpinnerBinding.java
+ com.example.desafioinventario.databinding.AulasSpinnerBinding
+com/example/desafioinventario/databinding/AulasCreaterBinding.java
+ com.example.desafioinventario.databinding.AulasCreaterBinding
+com/example/desafioinventario/databinding/PasswordChangerBinding.java
+ com.example.desafioinventario.databinding.PasswordChangerBinding
+com/example/desafioinventario/databinding/DispositivosItemBinding.java
+ com.example.desafioinventario.databinding.DispositivosItemBinding
+com/example/desafioinventario/BuildConfig.java
+ com.example.desafioinventario.BuildConfig
+com/example/desafioinventario/databinding/FragmentDispositivosBinding.java
+ com.example.desafioinventario.databinding.FragmentDispositivosBinding
+com/example/desafioinventario/databinding/FragmentAulasBinding.java
+ com.example.desafioinventario.databinding.FragmentAulasBinding
+com/example/desafioinventario/databinding/AulasItemBinding.java
+ com.example.desafioinventario.databinding.AulasItemBinding
+com/example/desafioinventario/databinding/ActivitySplashScreenBinding.java
+ com.example.desafioinventario.databinding.ActivitySplashScreenBinding
+com/example/desafioinventario/databinding/ActivityInventarioBinding.java
+ com.example.desafioinventario.databinding.ActivityInventarioBinding
+com/example/desafioinventario/databinding/ActivityInterfazUsuarioBinding.java
+ com.example.desafioinventario.databinding.ActivityInterfazUsuarioBinding

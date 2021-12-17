@@ -1,0 +1,90 @@
+[
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\dispositivos_creater.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\dispositivos_creater.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\nav_header_interfaz_usuario.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\nav_header_interfaz_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\encargados_list.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\encargados_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\usuarios_item.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\usuarios_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\aulas_spinner.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\aulas_spinner.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_dispositivos.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\fragment_dispositivos.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_perfil.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\fragment_perfil.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\password_changer.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\password_changer.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\cursos_list.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\cursos_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\aulas_item.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\aulas_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_login.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\app_bar_interfaz_usuario.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\app_bar_interfaz_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\usuarios_modifier.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\usuarios_modifier.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_inventario.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\activity_inventario.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\content_interfaz_usuario.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\content_interfaz_usuario.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\aulas_creater.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\aulas_creater.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_aulas.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\fragment_aulas.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_usuarios.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\fragment_usuarios.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\dispositivos_item.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\dispositivos_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_splash_screen.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\activity_splash_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_interfaz_usuario.xml",
+        "source": "C:\\Users\\jorge\\Desktop\\Jorge Arenas\\DAM2\\PMDM\\Android\\Ejercicios\\DesafioInventario\\DesafioInventario\\app\\src\\main\\res\\layout\\activity_interfaz_usuario.xml"
+    }
+]
