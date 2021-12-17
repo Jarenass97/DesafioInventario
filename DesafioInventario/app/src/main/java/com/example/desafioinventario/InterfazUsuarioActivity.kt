@@ -49,6 +49,7 @@ class InterfazUsuarioActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_aulas,
                 R.id.nav_usuarios,
+                R.id.nav_dispositivos,
                 R.id.nav_perfil
             ),
             drawerLayout
@@ -74,6 +75,7 @@ class InterfazUsuarioActivity : AppCompatActivity() {
         if (!usuario.isJefe()) {
             val nav_Menu: Menu = navigationView.menu
             nav_Menu.findItem(R.id.nav_usuarios).isVisible = false
+            nav_Menu.findItem(R.id.nav_dispositivos).isVisible = false
         }
     }
 

@@ -46,4 +46,5 @@
     <string name="strIdentificador">Identifier</string>
     <string name="strCrearDispositivo">Create device</string>
     <string name="strModificarDispositivo">Modify device</string>
+    <string name="menu_dispositivos">Manage devices</string>
 </resources>

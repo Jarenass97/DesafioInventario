@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_manage_users"
             android:title="@string/menu_usuarios" />
         <item
+            android:id="@+id/nav_dispositivos"
+            android:icon="@drawable/ic_devices"
+            android:title="@string/menu_dispositivos" />
+        <item
             android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_person"
             android:title="@string/menu_perfil" />
