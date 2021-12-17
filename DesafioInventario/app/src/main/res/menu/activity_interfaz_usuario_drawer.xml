@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_aulas"
+            android:icon="@drawable/ic_class"
+            android:title="@string/menu_aulas" />
+        <item
+            android:id="@+id/nav_usuarios"
+            android:icon="@drawable/ic_manage_users"
+            android:title="@string/menu_usuarios" />
+        <item
+            android:id="@+id/nav_dispositivos"
+            android:icon="@drawable/ic_devices"
+            android:title="@string/menu_dispositivos" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_person"
+            android:title="@string/menu_perfil" />
+    </group>
+</menu>

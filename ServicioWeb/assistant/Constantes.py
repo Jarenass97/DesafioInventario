@@ -1,0 +1,30 @@
+TABLA_USUARIOS = 'usuarios'
+USERNAME__USUARIOS = 'username'
+PASSWD__USUARIOS = 'password'
+EMAIL__USUARIOS = 'email'
+IMAGE__USUARIOS = 'image'
+
+TABLA__USER_ROLES = 'usuarios_roles'
+ID_USER__USER_ROLES = 'id_user'
+ID_ROL__USER_ROLES = 'id_rol'
+
+ARRAY_ROLES = 'roles'
+JEFE_DEPARTAMENTO = 'JEFE_DEPARTAMENTO'
+ENCARGADO = 'ENCARGADO'
+PROFESOR = 'PROFESOR'
+
+ID_JEFE_DEPARTAMENTO = 1
+ID_ENCARGADO = 2
+ID_PROFESOR = 3
+
+TABLA__AULAS = 'aulas'
+NOMBRE__AULAS = 'nombre'
+DESCRIPCION__AULAS = 'descripcion'
+CURSO_IMPARTIDO__AULAS = 'curso_impartido'
+ENCARGADO__AULAS = 'username_encargado'
+NUM_ALUMNOS__AULAS = 'num_alumnos'
+
+TABLA__DISPOSITIVOS = 'dispositivos'
+ID__DISPOSITIVOS = 'identificador'
+NOMBRE__DISPOSITIVOS = 'nombre'
+AULA__DISPOSITIVOS = 'aula'

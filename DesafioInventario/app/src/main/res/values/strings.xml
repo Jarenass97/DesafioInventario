@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Classroom Inventory</string>
+    <string name="strUsuario">Username</string>
+    <string name="strPasswd">Password</string>
+    <string name="strRegistrarse">Check in</string>
+    <string name="strIniciarSesion">Log in</string>
+    <string name="strCambiarFoto">Change photo</string>
+    <string name="strRepitePasswd">Repeat password</string>
+    <string name="strJefe">Boss</string>
+    <string name="strEncargado">Manager</string>
+    <string name="strProfesor">Teacher</string>
+    <string name="strCamposVacios">Fill in all the fields</string>
+    <string name="strPassNoCoinciden">Passwords do not match</string>
+    <string name="strOperacionExitosa">Operation completed successfully</string>
+    <string name="strFalloConexion">Connection failure</string>
+    <string name="strElegirFoto">Choose photo</string>
+    <string name="strMensajeElegirFoto">How do you want to add the photo?</string>
+    <string name="strCamara">Camera</string>
+    <string name="strGaleria">Gallery</string>
+    <string name="strLoginCorrecto">Login successfull</string>
+    <string name="strCredencialesIncorrectas">Wrong credentials</string>
+    <string name="strTituloCerrarSesion">Log out</string>
+    <string name="strMensajeCerrarSesion">Do you want to log out?</string>
+    <string name="title_activity_interfaz_usuario" translatable="false">InterfazUsuarioActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_aulas">Classrooms</string>
+    <string name="strAula">Classroom</string>
+    <string name="strCurso">Course</string>
+    <string name="strDescripcion">Description</string>
+    <string name="strAlumnos">Students</string>
+    <string name="strTituloAddAula">New classroom</string>
+    <string name="strCancelar">Cancel</string>
+    <string name="strNombre">Name</string>
+    <string name="strEmail" translatable="false">E-mail</string>
+    <string name="strCambiarPassword">Change Password</string>
+    <string name="strTituloBorrar">Delete</string>
+    <string name="strMensajeBorrar">Do you want to delete the selected item?</string>
+    <string name="menu_perfil">Profile</string>
+    <string name="strTituloModAula">Modify classroom</string>
+    <string name="menu_usuarios">Manage users</string>
+    <string name="strTituloModUser">Modify user</string>
+    <string name="strEligeOpcion">Choose what to do</string>
+    <string name="strMensajeOpcionAula">What do you want to do with the selected classroom?</string>
+    <string name="strEditar">Edit</string>
+    <string name="strVerInventario">View inventory</string>
+    <string name="strIdentificador">Identifier</string>
+    <string name="strCrearDispositivo">Create device</string>
+    <string name="strModificarDispositivo">Modify device</string>
+    <string name="menu_dispositivos">Manage devices</string>
+</resources>
